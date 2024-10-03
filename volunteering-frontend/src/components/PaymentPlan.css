@@ -1,0 +1,21 @@
+.payment-plan {
+  margin: 20px 0;
+}
+
+.payment-plan h3 {
+  margin-bottom: 10px;
+}
+
+.payment-plan label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.payment-plan input[type="radio"] {
+  margin-right: 8px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

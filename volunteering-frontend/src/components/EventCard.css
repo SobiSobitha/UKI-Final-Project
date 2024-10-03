@@ -1,0 +1,26 @@
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Display cards in 3 columns */
+    gap: 16px;
+    margin: 20px 0;
+  }
+  
+  .event-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .event-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-details {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  

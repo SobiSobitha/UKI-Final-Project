@@ -1,0 +1,183 @@
+html, body {
+    height: 100%; /* Full height of the viewport */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent vertical scrolling */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #44004d !important;
+    padding: 0 20px;
+    height: 200px;
+    position: relative;
+    z-index: 3; /* Increased z-index */
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    z-index: 4; /* Ensure logo is on top */
+}
+
+.navbar-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    margin-left: 20px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white; /* Ensure links are white */
+    font-size: 18px;
+    z-index: 4; /* Ensure links are on top of the navbar */
+    transition: color 0.3s ease;
+    background: #44004d;
+}
+
+.navbar-links a:hover {
+    color: #f8eff7; /* Lighter purple on hover */
+}
+
+/* Section with Text and Buttons */
+.image-album {
+    display: flex;
+    flex-direction: column; /* Column layout */
+    align-items: center; /* Center content horizontally */
+    padding: 50px 20px;
+    background-color: #f2e0f2; /* Light purple section background */
+    height: 80vh; /* Adjust height as needed (80% of viewport height) */
+}
+
+/* Left Section */
+.left-side {
+    text-align: center; /* Center text horizontally */
+    padding: 20px;
+    font-size: 18px;
+    color: #41004d;
+    font-weight: bold;
+    width: 100%; /* Take full width */
+}
+
+/* Right Section */
+.right-side {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    margin-top: 20px; /* Space between paragraph and buttons */
+}
+
+.button {
+    background-color: #47004d; /* Dark purple button */
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px; /* Space between buttons */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #f6b9f2; /* Lighter purple on hover */
+}
+.button1 {
+    background-color: #47004d; /* Dark purple button */
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px; /* Space between buttons */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.button1:hover {
+    background-color: #f6b9f2; /* Lighter purple on hover */
+}
+
+/* Text Runner */
+.text-runner {
+    margin-top: 20px; /* Space between buttons and text runner */
+    width: 100%;
+    overflow: hidden; /* Hide overflow */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.scrolling-text {
+    display: inline-block;
+    animation: scroll-left 10s linear infinite; /* Animation settings */
+    font-size: 25px;
+    color: #41004d;
+    font-weight: bold;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%); /* Start off-screen to the right */
+    }
+    100% {
+        transform: translateX(-100%); /* End off-screen to the left */
+    }
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #44004d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    height: 200px;
+}
+
+.social-media {
+    display: flex;
+    gap: 15px; /* Spacing between social media icons */
+    justify-content: center;
+}
+
+.social-media a {
+    color: white; /* White color for icons */
+    font-size: 24px; /* Icon size */
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f6b9f2; /* Lighter purple on hover */
+}

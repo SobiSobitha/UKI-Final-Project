@@ -1,0 +1,54 @@
+.dashboard-container {
+  text-align: center;
+  padding: 40px 20px; /* Increased padding for more space */
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.dashboard-navbar {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  gap: 20px; /* Space between buttons */
+  margin-bottom: 20px; /* Space below the navbar */
+}
+
+.dashboard-button {
+  padding: 12px 25px; /* Increased padding for larger buttons */
+  background-color: #4A4A8A; /* Button color */
+  color: white; /* Button text color */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition for hover effect */
+}
+
+.dashboard-button:hover {
+  background-color: #333366; /* Darker button color on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Optional: Custom styles for the Back to Home button */
+.back-home-button {
+  background-color: #af4c9d; /* Unique color for Back to Home button */
+}
+
+.back-home-button:hover {
+  background-color: #9828c9; /* Darker color on hover */
+}
+
+.dashboard-info {
+  margin-top: 20px; /* Spacing above the info section */
+}
+
+.dashboard-info h2 {
+  font-size: 1.5rem; /* Subtitle styling */
+  color: #4A4A8A; /* Consistent color */
+}
+
+.dashboard-info p {
+  color: #666; /* Darker text for readability */
+  margin: 5px 0; /* Margin for spacing between paragraphs */
+}

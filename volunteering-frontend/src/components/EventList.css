@@ -1,0 +1,68 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0e7ff;
+  overflow-y: hidden; /* Prevent body from scrolling */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  height: 100vh; /* Full viewport height */
+}
+
+.event-list-container {
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-height: 70vh; /* Limit the height of the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  width: 100%; /* Make container take full width of its parent */
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column; /* Arrange events in a column */
+  gap: 20px; /* Space between events */
+}
+
+.event-card {
+  padding: 15px; /* Padding inside each event card */
+  background-color: #ffffff; /* White background for each event */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  transition: transform 0.2s; /* Smooth transform on hover */
+}
+
+.event-card:hover {
+  transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.role-selection {
+  margin-top: 10px; /* Margin above the role selection */
+}
+
+.role-item {
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+.role-item input {
+  margin-right: 10px; /* Space between checkbox and label */
+}
+
+.loading {
+  text-align: center; /* Center the loading message */
+  font-size: 1.2rem; /* Larger text for visibility */
+}
+
+.error {
+  text-align: center; /* Center the error message */
+  color: red; /* Red text for error */
+  font-size: 1.2rem; /* Larger text for visibility */
+}
