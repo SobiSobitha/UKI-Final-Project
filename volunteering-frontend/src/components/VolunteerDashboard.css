@@ -1,18 +1,29 @@
+/* .body {
+    background-color: rgba(68, 0, 77, 0.7);
+    min-height: 100vh;
+} */
+
 .dashboard {
     padding: 20px;
-    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
+    max-height: 80vh; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: auto;
+    width: 500px;
 }
 
 h1 {
-    color: #333;
+    color: #fdf9f9;
 }
 
 h2 {
-    color: #555;
+    color: #f5f2f2;
 }
-
+/* h2.li{
+    color: #f5f2f2;
+} */
 section {
     margin-bottom: 20px;
 }
@@ -23,11 +34,12 @@ ul {
 }
 
 li {
-    background-color: #fff;
+    /* background-color: #fff; */
     margin: 5px 0;
     padding: 10px;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: rgb(247, 241, 247);
 }
 
 .dashboard-actions {
@@ -39,16 +51,17 @@ button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #6200ea;
+    background-color: #bb00ea;
     color: white;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #3700b3;
+    background-color: #8000b3;
 }
+
 .back-to-home {
-    background-color: #007BFF; /* Blue */
+    background-color: #d023d6; /* Blue */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -58,6 +71,13 @@ button:hover {
 }
 
 .back-to-home:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #c674d7; /* Darker blue on hover */
+}
+.white-link {
+    color: rgb(240, 226, 226);
+    text-decoration: none; /* Optional: Removes underline */
 }
 
+.white-link:hover {
+    text-decoration: underline; /* Optional: Add underline on hover */
+}

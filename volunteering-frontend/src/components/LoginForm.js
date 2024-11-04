@@ -50,33 +50,35 @@ const LoginForm = () => {
         return; 
       }
 
-      // Check for success message and token in the response
-if (responseData.success && responseData.token) {
-  const { token, user } = responseData; // Adjusted based on expected structure
+      if (responseData.success && responseData.token) {
+        const { token, user } = responseData; // Now this should contain user info
 
-  localStorage.setItem('token', token);
-  
-  // Ensure role is defined before navigating
-  if (user && user.role) {
-    const userRole = user.role.trim().toLowerCase();
-    
-    // Role-based navigation
-    if (userRole === 'organizer') {
-      navigate('/create-event');
-    } else if (userRole === 'volunteer') {
-      navigate('/events');
-    } else {
-      console.error('Role not recognized:', userRole);
-      setError('Login failed. Please try again.');
-    }
-  } else {
-    console.error('User role is undefined');
-    setError('Role information is missing from the response.');
-  }
-} else {
-  setError('Login failed. Please try again.');
-}
-
+        // Save token and role in local storage
+        localStorage.setItem('token', token);
+        
+        if (user && user.role) {
+          const userRole = user.role.trim().toLowerCase();
+          
+          // Save user role in local storage
+          localStorage.setItem('role', userRole); // Save the role in local storage
+          
+          // Role-based navigation
+          if (userRole === 'organizer') {
+            navigate('/organizer-dashboard');
+          } else if (userRole === 'volunteer') {
+            navigate('/events');
+          } else {
+            console.error('Role not recognized:', userRole);
+            setError('Login failed. Please try again.');
+          }
+        } else {
+          console.error('User role is undefined');
+          setError('Role information is missing from the response.');
+        }
+      } else {
+        setError('Login failed. Please try again.');
+      }
+      
     } catch (err) {
       console.error('Error during login:', err); 
       setError('Network error. Please try again.');
@@ -87,7 +89,7 @@ if (responseData.success && responseData.token) {
 
   return (
     <div className="login-page">
-      <h1>Login</h1>
+      <h1>Please login here!!</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email:
@@ -117,8 +119,12 @@ if (responseData.success && responseData.token) {
         </button>
       </form>
       <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
+        Don't have an account? 
+        <br />
+        <Link to="/register">Register as Volunteer</Link> 
+        or 
+        <Link to="/register-organizer">Register as Organizer</Link>
+      </p> {/* Add links for both types of registration */}
     </div>
   );
 };

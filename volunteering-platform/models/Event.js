@@ -16,7 +16,7 @@ const EventSchema = new mongoose.Schema({
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     volunteers: [VolunteerSchema],
     status: { type: String, default: 'pending' }, // Event status
-    paymentPlan: { type: String, required: true }, // Payment plan
+    // paymentPlan: { type: String, required: true }, 
 }, { timestamps: true });
 
 

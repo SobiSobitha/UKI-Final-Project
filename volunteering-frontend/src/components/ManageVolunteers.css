@@ -1,0 +1,200 @@
+
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: auto;
+ 
+} */
+
+.manage-volunteers-container {
+  padding: 20px;
+  color: #c613d6;
+}
+
+/* Volunteer card grid */
+.volunteers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Volunteer cards */
+.volunteer-card {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  border-radius: 50%; /* Circular card */
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.volunteer-card:hover {
+  transform: scale(1.05);
+}
+
+/* Avatar inside the volunteer card */
+.volunteer-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #6a0dad; /* Purple background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(244, 240, 240);
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Volunteer details text styling */
+.volunteer-details {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.volunteer-details h2 {
+  margin-bottom: 10px;
+  color: #6a0dad;
+  font-weight: bold;
+}
+
+.volunteer-details p {
+  margin: 5px 0;
+  color: #6a0dad;
+  font-weight: bold;
+}
+
+.volunteer-details button {
+  background: linear-gradient(90deg, #c814e3 0%, #c853ec 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  width: 25%;
+  transition: background 0.3s;
+}
+
+.volunteer-details button:hover {
+  background: linear-gradient(90deg, #c853ec 0%, #c814e3 100%);
+}
+
+/* Modal styling */
+.volunteer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Edit Volunteer Form */
+.modal-content form {
+  display: flex;
+  flex-direction: column; /* Stack input fields vertically */
+  gap: 15px; /* Space between form elements */
+  width: 200px;
+}
+
+/* Label styles */
+.modal-content label {
+  margin: 5px 0; /* Margin for label spacing */
+  color: #c613d6; /* Match the label color with your theme */
+  font-weight: bold; /* Make labels bold */
+}
+
+/* Input field styles */
+.modal-content input {
+  padding: 10px; /* Padding inside input fields */
+  border: 1px solid #c613d6; /* Border color matching the theme */
+  border-radius: 5px; /* Slightly rounded corners */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.3s; /* Transition for border color change */
+}
+
+/* Input field focus effect */
+.modal-content input:focus {
+  border-color: #6a0dad; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(106, 13, 173, 0.5); /* Subtle shadow effect */
+}
+
+/* Button styles */
+.modal-content button {
+  padding: 10px; /* Padding for buttons */
+  background: linear-gradient(90deg, #c814e3 0%, #c853ec 100%); /* Gradient background */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 25px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background 0.3s; /* Transition for background change */
+}
+
+/* Button hover effect */
+.modal-content button:hover {
+  background: linear-gradient(90deg, #c853ec 0%, #c814e3 100%); /* Reverse gradient on hover */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #f9f5f5; /* Dark close button */
+}
+
+.close-button:hover {
+  color: #c613d6; /* Hover effect to match purple theme */
+}
+
+/* Animation for modal entrance */
+.volunteer-modal .modal-content {
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* ManageVolunteers.css */
+
+/* Add this inside your existing CSS */
+.modal-actions {
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #c814e3 0%, #c853ec 100%);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.modal-actions button:hover {
+  background: linear-gradient(90deg, #c853ec 0%, #c814e3 100%);
+}

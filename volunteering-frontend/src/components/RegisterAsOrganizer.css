@@ -1,21 +1,23 @@
-body {
+/* body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f6e6f5;
     font-family: sans-serif;
-  }
+  
+  } */
 
   .register-container {
     max-width: 500px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #f4e3f0;
     border-radius: 8px;
-    background-color: #fff;
     text-align: center;
   }
-
+  .register-container h2{
+    color: #e831b7;
+  }
+  
   .form-group {
     margin-bottom: 15px;
     text-align: left;

@@ -29,14 +29,9 @@ const isApprovedOrganizer = async (req, res, next) => {
 };
 
 router.post('/create-event', isApprovedOrganizer, async (req, res) => {
-  const { title, description, date, location, roles, tasks, createdBy, paymentPlan } = req.body;
+  const { title, description, date, location, roles, tasks, createdBy } = req.body; // Removed paymentPlan
 
   try {
-    // Validate payment plan
-    if (!['1-month', '6-month', '1-year'].includes(paymentPlan)) {
-      return res.status(400).json({ message: 'Invalid payment plan selected.' });
-    }
-
     const newEvent = new Event({
       title,
       description,
@@ -46,7 +41,6 @@ router.post('/create-event', isApprovedOrganizer, async (req, res) => {
       tasks,
       createdBy,
       status: 'pending', 
-      paymentPlan, // Store payment plan in event schema
     });
 
     await newEvent.save();
@@ -56,6 +50,7 @@ router.post('/create-event', isApprovedOrganizer, async (req, res) => {
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 });
+
 
 
 // Payment completion endpoint (update event status)

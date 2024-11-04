@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PaymentPlan from './PaymentPlan'; // Import the PaymentPlan component
 import './CreateEventForm.css';
 
 const CreateEventForm = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [eventDetails, setEventDetails] = useState({
     title: '',
@@ -17,7 +15,6 @@ const CreateEventForm = () => {
   });
 
   const [userId, setUserId] = useState(null);
-  const [selectedPlan, setSelectedPlan] = useState(''); // State for selected payment plan
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -97,29 +94,23 @@ const CreateEventForm = () => {
       setErrorMessage('Event location is required.');
       return;
     }
-    if (!selectedPlan) {
-      setErrorMessage('Please select a payment plan.');
-      return;
-    }
 
     try {
       const token = localStorage.getItem('token');
 
       console.log('Event Details:', eventDetails);
-      console.log('Selected Payment Plan:', selectedPlan);
       console.log('Created By (User ID):', userId);
 
       const response = await createEvent(
         {
           ...eventDetails,
-          paymentPlan: selectedPlan, // Pass selectedPlan to the event creation
           createdBy: userId,
         },
         token
       );
 
-      alert('Event created successfully! Proceed to payment.');
-      navigate(`/payment/${response.event._id}`);
+      alert('Event created successfully!');
+      navigate(`/create-event-payment`); // Navigate to the event details page after creation
     } catch (err) {
       if (err.response) {
         setErrorMessage(`Error creating event: ${err.response.data.message || 'Unknown error'}`);
@@ -160,8 +151,6 @@ const CreateEventForm = () => {
         value={eventDetails.location}
         onChange={handleInputChange}
       />
-
-      <PaymentPlan selectedPlan={selectedPlan} setSelectedPlan={setSelectedPlan} /> {/* Payment Plan Component */}
 
       <h3>Roles</h3>
       {eventDetails.roles.map((role, index) => (

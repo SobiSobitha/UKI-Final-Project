@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
+import AboutUs from './components/AboutUs';
+import Volunteerpro from './components/VolunteerPro';
+import ContactUs from './components/ContactUs';
 import RegisterForm from './components/RegisterForm';
 import EventList from './components/EventList';
 import CreateEventForm from './components/CreateEventForm';
@@ -12,6 +15,8 @@ import OrganizerDashboard from './components/OrganizerDashboard';
 import VolunteerDashboard from './components/VolunteerDashboard';
 import FeedbackPage from './components/FeedbackPage';
 import PaymentPlan from './components/PaymentPlan';
+import ManageVolunteers from './components/ManageVolunteers';
+import ViewAnalytics from './components/ViewAnalytics';
 
 
 const Overview = () => <div>Overview Content</div>;
@@ -25,7 +30,10 @@ function App() {
         <Router>
             <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/register" element={<RegisterForm />} />
+            <Route path="/volunteerpro" element={<Volunteerpro />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/events" element={<EventList />} />
             <Route path="/create-event" element={<CreateEventForm />} />
@@ -34,6 +42,8 @@ function App() {
             <Route path="/create-event-payment" element={<PaymentPlan />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
             <Route path="/overview" element={<Overview />} />
+            <Route path="/view-analytics" element={<ViewAnalytics />} />
+            <Route path="/manage-volunteers" element={<ManageVolunteers />} />
             <Route path="/event-manage" element={<EventManagement />} />
             <Route path="/volunteer-dashboard" element={<VolunteerDashboard/>}/>
             <Route path="/feedback/:eventId" element={<FeedbackPage />} />

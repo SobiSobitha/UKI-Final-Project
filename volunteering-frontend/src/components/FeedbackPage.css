@@ -1,60 +1,75 @@
-/* Style the feedback page container */
+
 .feedback-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style the page title */
-.feedback-container h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 20px;
+    width: 455px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-/* Style the form */
-.feedback-container form {
+    background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    color: #f9f1f1;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #f4f0f0;
+  }
+  
+  .emoji-selector {
     display: flex;
-    flex-direction: column;
-}
-
-/* Style the label */
-.feedback-container label {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Style the textarea */
-.feedback-container textarea {
-    height: 150px;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .emoji-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+  
+  .emoji-button.selected, .emoji-button:hover {
+    opacity: 1;
+  }
+  
+  .feedback-form {
+    margin-top: 20px;
+  }
+  
+  .feedback-form textarea {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-    color: #333;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
     resize: none;
-    margin-bottom: 20px;
-}
-
-/* Style the submit button */
-.feedback-container button {
-    padding: 10px 20px;
-    background-color: #6a0dad; /* Purple color */
+    font-size: 1rem;
+  }
+  
+  .submit-button {
+    background: linear-gradient(90deg, #c814e3 0%, #c853ec 100%);
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effect for the button */
-.feedback-container button:hover {
-    background-color: #5c0bb5; /* Darker purple on hover */
-}
+    transition: background 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: linear-gradient(90deg, #c853ec 0%, #c814e3 100%);
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  

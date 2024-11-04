@@ -71,39 +71,44 @@ router.post('/register/Organizer', async (req, res) => {
   }
 });
 
+// Login function
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
       const user = await User.findOne({ email });
-      console.log('Fetched user:', user); // Debug log
 
+      // Check if user exists
       if (!user) {
-          return res.status(400).json({ success: false, message: 'Invalid email or password.' });
+          return res.status(404).json({ success: false, message: 'User not found' });
       }
 
       // Check if user is approved (for organizers)
-// Check if user is approved (for organizers)
-if (user.role === 'Organizer') {
-  console.log('User approval status:', user.isApproved); // Debug log
-  if (!user.isApproved) {
-      return res.status(403).json({ success: false, message: 'Your account is pending admin approval.' });
-  }
-}
-
-
-      // Check password
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-          return res.status(400).json({ success: false, message: 'Invalid email or password.' });
+      if (user.role === 'Organizer' && !user.isApproved) {
+          return res.status(403).json({ success: false, message: 'Your account is pending admin approval.' });
       }
 
-      // Generate JWT Token
-      const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-      res.json({ success: true, token, message: 'Login successful' });
+      // Compare passwords (stored password is hashed)
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      // Check if password matches
+      if (!isMatch) {
+          return res.status(400).json({ success: false, message: 'Invalid email or password' });
+      }
+
+      // Generate a JWT token
+      const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+      // Successful login response
+      return res.status(200).json({
+          success: true,
+          message: "Login successful",
+          token,
+          user: { id: user._id, role: user.role } // Include user role in the response
+      });
   } catch (err) {
-      console.error('Login error:', err);
-      res.status(500).json({ success: false, message: 'Server error. Please try again.' });
+      console.error('Error during login:', err);
+      return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
 

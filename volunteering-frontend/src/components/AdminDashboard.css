@@ -1,21 +1,32 @@
+/* html, body {
+  height: 100%; 
+  margin: 0;   
+} */
+
 .admin-dashboard {
   padding: 20px;
-  background-color: #f9f9f9;
+  color: #e70c9e;
   display: flex;
   flex-direction: column; /* Stack items vertically */
+  height: calc(100vh - 40px); /* Set to full viewport height minus padding */
+  overflow-y: auto; /* Allow vertical scrolling */
+  background-color: rgba(219, 103, 232, 0.7); /* Semi-transparent background */
+
 }
 
 h1 {
   text-align: center;
+  color: #dc12ba;
 }
 
 .navbar {
   margin: 20px 0;
 }
 
-.nav-links {
+.nav-links  li {
   display: flex;
   justify-content: space-around;
+  color: rgb(210, 41, 41);
 }
 
 .error-message {
@@ -23,7 +34,9 @@ h1 {
   margin-bottom: 20px;
 }
 
-.stats-section, .organizer-list, .user-list {
+.stats-section,
+.organizer-list,
+.user-list {
   margin: 20px 0;
   width: 100%; /* Ensure sections take full width */
 }
@@ -35,7 +48,7 @@ h1 {
 }
 
 .stat-card {
-  background-color: #fff;
+  background-color: #dc12ba;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -52,13 +65,15 @@ h1 {
   border: 1px solid #ccc;
 }
 
-.organizer-list, .user-list {
+.organizer-list,
+.user-list {
   list-style-type: none;
   padding: 0;
 }
 
-.organizer-list li, .user-list li {
-  background: #fff;
+.organizer-list li,
+.user-list li {
+  background: #d153dd;
   padding: 15px;
   margin: 10px 0;
   border-radius: 5px;
@@ -67,7 +82,7 @@ h1 {
 
 button {
   padding: 8px 12px;
-  background-color: #007bff;
+  background-color: #ca39cf;
   color: white;
   border: none;
   border-radius: 5px;
@@ -75,5 +90,5 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #d263cb;
 }

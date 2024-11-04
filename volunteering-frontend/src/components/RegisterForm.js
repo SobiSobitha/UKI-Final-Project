@@ -24,7 +24,7 @@ const RegisterForm = () => {
     setSuccessMessage('');
 
     // Log the data being sent
-    console.log('Registration Data:', { ...formData, role: 'volunteer' }); // Log the data being sent
+    console.log('Registration Data:', { ...formData, role: 'volunteer' });
 
     // Ensure all fields are filled
     if (!formData.name || !formData.username || !formData.email || !formData.password) {
@@ -38,7 +38,7 @@ const RegisterForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          role: 'volunteer' // Set role to volunteer automatically
+          role: 'volunteer'
         }),
       });
 
@@ -48,12 +48,14 @@ const RegisterForm = () => {
       }
 
       const data = await response.json();
-      const token = data.token; // Make sure to retrieve the token directly from data
+      const token = data.token;
+      const userId = data.user.id;
 
       if (token) {
         localStorage.setItem('token', token);
-        setSuccessMessage('Registration successful!'); // Set success message
-        navigate('/events'); // Redirect to the events page for volunteers
+        localStorage.setItem('userId', userId);
+        setSuccessMessage('Registration successful!');
+        navigate('/events');
       } else {
         setErrorMessage('Token not found in response');
       }
@@ -64,14 +66,14 @@ const RegisterForm = () => {
 
   return (
     <div className="register-page">
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/events">Event List</Link>
           </li>
         </ul>
-      </nav>
-      <h1>Register</h1>
+      </nav> */}
+      <h1> Welcome Volunteer!</h1>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -88,7 +90,7 @@ const RegisterForm = () => {
           />
         </label>
         <label htmlFor="username">
-          Username:  {/* Add username label */}
+          Username:
           <input
             type="text"
             id="username"

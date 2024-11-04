@@ -1,10 +1,12 @@
-html, body {
+/* html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f0e7ff;
-  overflow-y: hidden; /* Prevent body from scrolling */
+  background-color: #5b0cda; 
+  overflow-y: hidden; 
+
+
 }
 
 body {
@@ -12,33 +14,46 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding-top: 50px;
-  height: 100vh; /* Full viewport height */
-}
+  height: 100vh; 
+} */
 
 .event-list-container {
   padding: 20px;
-  background-color: #f9f9f9; /* Light background for contrast */
+  /* background-color: #f9f9f9;  */
+  /* background-color: rgba(68, 0, 77, 0.7); Semi-transparent background */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  max-height: 70vh; /* Limit the height of the container */
+  max-height: 100vh; /* Limit the height of the container */
   overflow-y: auto; /* Enable vertical scrolling */
   width: 100%; /* Make container take full width of its parent */
+  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
+
 }
 
 .event-list {
   display: flex;
   flex-direction: column; /* Arrange events in a column */
   gap: 20px; /* Space between events */
+  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
+
 }
 
 .event-card {
   padding: 15px; /* Padding inside each event card */
-  background-color: #ffffff; /* White background for each event */
-  border: 1px solid #ddd; /* Light border */
+  background-color: #9e1111; /* White background for each event */
+  border: 1px solid #dd2f2f; /* Light border */
   border-radius: 5px; /* Rounded corners */
   transition: transform 0.2s; /* Smooth transform on hover */
-}
+  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
+  color: black;
 
+}
+.event-card h2{
+  color: purple;
+}
+.event-card p{
+  color: purple;
+}
 .event-card:hover {
   transform: scale(1.02); /* Slightly scale up on hover */
 }

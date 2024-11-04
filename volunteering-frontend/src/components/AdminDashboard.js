@@ -4,15 +4,18 @@ import axios from 'axios';
 import StatsSection from '../components/StatsSection';
 import PendingOrganizers from '../components/PendingOrganizers';
 import AllUsers from './AllUsers';
+import ContactMessages from '../components/ContactMessages'; // Import new component
 
 const AdminDashboard = () => {
   const [pendingOrganizers, setPendingOrganizers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [contactMessages, setContactMessages] = useState([]); // State for contact messages
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState({
     pendingOrganizers: true,
     allUsers: true,
+    contactMessages: false, // Add loading state for contact messages
     stats: true,
   });
   const [stats, setStats] = useState({
@@ -25,6 +28,7 @@ const AdminDashboard = () => {
     fetchPendingOrganizers();
     fetchAllUsers();
     fetchDashboardStats();
+    fetchContactMessages();
   }, []);
 
   const fetchPendingOrganizers = async () => {
@@ -57,6 +61,21 @@ const AdminDashboard = () => {
       setError('Failed to fetch users.');
     } finally {
       setLoading(prev => ({ ...prev, allUsers: false }));
+    }
+  };
+
+  // Fetch contact messages
+  const fetchContactMessages = async () => {
+    setLoading(prev => ({ ...prev, contactMessages: true }));
+    try {
+      const response = await axios.get('http://localhost:8001/api/contact/messages');
+      console.log("Fetched contact messages:", response.data); // Add this line
+      setContactMessages(response.data);
+    } catch (error) {
+      console.error('Error fetching contact messages:', error); // Add this line
+      setError('Failed to fetch contact messages.');
+    } finally {
+      setLoading(prev => ({ ...prev, contactMessages: false }));
     }
   };
 
@@ -133,6 +152,8 @@ const AdminDashboard = () => {
           <li><a href="#pending-organizers">Pending Organizers</a></li>
           <li><a href="#all-users">All Users</a></li>
           <li><a href="#dashboard-stats">Dashboard Stats</a></li>
+          <li><a href="#view-payments">View Payments</a></li>
+          <li><button onClick={fetchContactMessages} className="fetch-messages-button">Contact Messages</button></li>
         </ul>
       </nav>
 
@@ -161,8 +182,13 @@ const AdminDashboard = () => {
         onSuspend={handleSuspendUser}
         onUnsuspend={handleUnsuspendUser}
       />
+
+      {/* Display Contact Messages */}
+      <ContactMessages messages={contactMessages} loading={loading.contactMessages} />
     </div>
   );
 };
 
 export default AdminDashboard;
+
+

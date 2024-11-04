@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+// import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import axios from 'axios';
 import './RegisterAsOrganizer.css'; // Import your CSS file for styling
 
@@ -7,7 +7,7 @@ const RegisterAsOrganizer = () => {
     const [formData, setFormData] = useState({ username: '', email: '', password: '' });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
+    // const navigate = useNavigate(); // Initialize useNavigate
 
     const handleRegister = async (e) => {
         e.preventDefault(); // Prevent default form submission
@@ -36,7 +36,7 @@ const RegisterAsOrganizer = () => {
             alert(response.data.message); // Show success message
 
             // Redirect to Create Event form
-            navigate('/organizer-dashboard'); // Navigate to the create event page
+            // navigate('/organizer-dashboard'); // Navigate to the create event page
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message);
             setError(error.response?.data?.message || "Registration failed. Please try again.");

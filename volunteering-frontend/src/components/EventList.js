@@ -27,16 +27,17 @@ const EventList = () => {
     fetchEvents();
   }, []);
 
-  const handleRoleChange = (eventId, roleId) => {
-    console.log(`Role changed for event ID ${eventId}: Role ID ${roleId}`);
+  const handleRoleChange = (eventId, role) => {
+    console.log(`Role changed for event ID ${eventId}: Role ${role}`);
+    // You can navigate to a dashboard or submit the selection to the backend here
   };
 
   const handleBackToHome = () => {
     navigate('/');
   };
 
-  const handleSeeMore = () => {
-    navigate('/volunteer-dashboard'); // Navigate to Volunteer Dashboard
+  const handleSeeMore = (eventId) => {
+    navigate(`/volunteer-dashboard`); // Navigate to detailed event page
   };
 
   if (loading) {
@@ -97,7 +98,7 @@ const EventList = () => {
             )}
 
             {/* See More Button */}
-            <button className="see-more" onClick={handleSeeMore}>
+            <button className="see-more" onClick={() => handleSeeMore(event._id)}>
               See More
             </button>
           </div>
