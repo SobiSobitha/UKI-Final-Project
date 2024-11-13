@@ -1,57 +1,115 @@
-/* body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: sans-serif;
-  
-  } */
+/* Container for the register form */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #FDF5E6;
+  padding: 20px;
+}
 
-  .register-container {
-    max-width: 500px;
-    padding: 20px;
-    border: 1px solid #f4e3f0;
-    border-radius: 8px;
-    text-align: center;
-  }
-  .register-container h2{
-    color: #e831b7;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-    width: 300px;
-  }
+/* Box containing the register form */
+.register-box {
+  background-color: #dae8e3;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
 
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
+/* Title of the register form */
+.register-title {
+  font-size: 24px;
+  color: #223D6C;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
 
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: left;
-  }
+/* Form description */
+.register-description {
+  text-align: center;
+  color: #223D6C;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
 
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5a67d8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+/* Form styling */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
 
-  button:disabled {
-    background-color: #ccc;
-  }
+/* Input group styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
 
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
+/* Label styling */
+.input-label {
+  font-size: 14px;
+  color: #223D6C;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+.input-field {
+  padding: 10px;
+  border: 1px solid #88B0A2;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #223D6C;
+  outline: none;
+}
+
+/* Input field focus styling */
+.input-field:focus {
+  border-color: #E97451;
+  box-shadow: 0 0 5px rgba(233, 116, 81, 0.5);
+}
+
+/* Alert message styling */
+.alert {
+  background-color: #FFEBEB;
+  color: #D9534F;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Submit button styling */
+.register-button {
+  background-color: #E97451;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the submit button */
+.register-button:hover {
+  background-color: #D76642;
+}
+
+/* Disabled button styling */
+.register-button:disabled {
+  background-color: #D1D1D1;
+  cursor: not-allowed;
+}
+
+/* Agreement text styling */
+.register-agreement {
+  text-align: center;
+  font-size: 12px;
+  color: #223D6C;
+}

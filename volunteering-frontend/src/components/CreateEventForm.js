@@ -121,65 +121,94 @@ const CreateEventForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="create-event-form">
-      <h2>Create Event</h2>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <input
-        type="text"
-        name="title"
-        placeholder="Event Title"
-        value={eventDetails.title}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Event Description"
-        value={eventDetails.description}
-        onChange={handleInputChange}
-      />
-      <input
-        type="date"
-        name="date"
-        value={eventDetails.date}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="location"
-        placeholder="Location"
-        value={eventDetails.location}
-        onChange={handleInputChange}
-      />
-
-      <h3>Roles</h3>
-      {eventDetails.roles.map((role, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder={`Role ${index + 1}`}
-            value={role}
-            onChange={(e) => handleRoleChange(index, e.target.value)}
-          />
+    <div className="create-event-wrapper">
+      <div className="create-event-card">
+        <div className="create-event-card-header">
+          <h2 className="create-event-card-title">Create Event</h2>
         </div>
-      ))}
-      <button type="button" onClick={addRoleField}>Add Another Role</button>
+        <div className="create-event-card-content">
+          <form onSubmit={handleSubmit} className="create-event-form">
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            
+            <input
+              type="text"
+              name="title"
+              placeholder="Event Title"
+              value={eventDetails.title}
+              onChange={handleInputChange}
+              className="create-event-input"
+            />
+            <input
+              type="text"
+              name="description"
+              placeholder="Event Description"
+              value={eventDetails.description}
+              onChange={handleInputChange}
+              className="create-event-input"
+            />
+            <input
+              type="date"
+              name="date"
+              value={eventDetails.date}
+              onChange={handleInputChange}
+              className="create-event-input"
+            />
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={eventDetails.location}
+              onChange={handleInputChange}
+              className="create-event-input"
+            />
 
-      <h3>Tasks</h3>
-      {eventDetails.tasks.map((task, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder={`Task ${index + 1}`}
-            value={task}
-            onChange={(e) => handleTaskChange(index, e.target.value)}
-          />
+            <h3 className="create-event-section-title">Roles</h3>
+            {eventDetails.roles.map((role, index) => (
+              <div key={index} className="create-event-role-task-wrapper">
+                <input
+                  type="text"
+                  placeholder={`Role ${index + 1}`}
+                  value={role}
+                  onChange={(e) => handleRoleChange(index, e.target.value)}
+                  className="create-event-input"
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addRoleField}
+              className="add-role-task-button"
+            >
+              Add Another Role
+            </button>
+
+            <h3 className="create-event-section-title">Tasks</h3>
+            {eventDetails.tasks.map((task, index) => (
+              <div key={index} className="create-event-role-task-wrapper">
+                <input
+                  type="text"
+                  placeholder={`Task ${index + 1}`}
+                  value={task}
+                  onChange={(e) => handleTaskChange(index, e.target.value)}
+                  className="create-event-input"
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addTaskField}
+              className="add-role-task-button"
+            >
+              Add Another Task
+            </button>
+
+            <button type="submit" className="create-event-button">
+              Create Event
+            </button>
+          </form>
         </div>
-      ))}
-      <button type="button" onClick={addTaskField}>Add Another Task</button>
-
-      <button type="submit">Create Event</button>
-    </form>
+      </div>
+    </div>
   );
 };
 

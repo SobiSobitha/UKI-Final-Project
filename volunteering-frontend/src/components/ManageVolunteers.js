@@ -14,13 +14,13 @@ const ManageVolunteers = () => {
     phone: '',
   });
 
-  const predefinedTasks = [
-    'Set up event',
-    'Manage registration',
-    'Assist with logistics',
-    'Coordinate with vendors',
-    'Clean up after event',
-  ];
+  // const predefinedTasks = [
+  //   'Set up event',
+  //   'Manage registration',
+  //   'Assist with logistics',
+  //   'Coordinate with vendors',
+  //   'Clean up after event',
+  // ];
 
   useEffect(() => {
     const fetchVolunteers = async () => {
@@ -196,11 +196,11 @@ const ManageVolunteers = () => {
                 <p><strong>Role:</strong> {selectedVolunteer.role}</p>
                 <p><strong>Phone:</strong> {selectedVolunteer.phone || 'N/A'}</p>
                 <div className="modal-actions">
-                  {predefinedTasks.map((task) => (
+                  {/* {predefinedTasks.map((task) => (
                     <button key={task} onClick={() => handleAssign(selectedVolunteer._id, task)}>
                       Assign "{task}"
                     </button>
-                  ))}
+                  ))} */}
                   <button onClick={handleEdit}>Edit</button>
                 </div>
               </div>

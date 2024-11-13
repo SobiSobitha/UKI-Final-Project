@@ -1,94 +1,138 @@
-/* Page Layout */
-/* html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f0e7ff;
-  overflow-y: hidden; 
+/* External CSS for Create Event Form */
+
+/* Background and Form Wrapper */
+.create-event-wrapper {
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #F8F4E9;
 }
 
-body {
+/* Card Styles */
+.create-event-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.create-event-card-header {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.create-event-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #41436A;
+}
+
+/* Card Content */
+.create-event-card-content {
+  padding: 24px;
+}
+
+/* Form Styles */
+.create-event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Error Message */
+.error-message {
+  padding: 16px;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  background-color: #fddede;
+  color: #d9534f;
+}
+
+/* Input and Textarea */
+.create-event-input,
+.create-event-textarea {
+  padding: 12px;
+  border: 2px solid #84A59D;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.create-event-input:focus,
+.create-event-textarea:focus {
+  outline: none;
+  border-color: #E27D60;
+}
+
+/* Section Titles */
+.create-event-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #41436A;
+}
+
+/* Button Styles */
+.create-event-button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  color: white;
+  background-color: #41436A;
+  border: none;
+  cursor: pointer;
+}
+
+.create-event-button-outline {
+  padding: 8px;
+  border: 1px solid #E27D60;
+  color: #E27D60;
+  background-color: transparent;
+}
+
+.create-event-button-outline:hover {
+  background-color: #E27D60;
+  color: white;
+}
+
+.create-event-button:hover {
+  background-color: #2F314B;
+}
+
+/* Add Role/Task Button */
+.add-role-task-button {
+  background-color: #E27D60;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-role-task-button:hover {
+  background-color: #F27A64;
+}
+
+/* Input and Button Spacing for Roles and Tasks */
+.create-event-role-task-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Trash Icon Button */
+.trash-icon-button {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: none;
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
-  padding-top: 50px; 
-  height: 100%; 
-  overflow: hidden; 
-} */
-
-.create-event-form {
-  max-width: 500px;
-  width: 100%;
-  height: 70vh; /* Limit the form height to 60% of the viewport height */
-  margin: 40px auto;
-  padding: 40px;
-  background-color: #fff; 
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Enable vertical scrolling within the form */
-  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
-
-}
-
-.create-event-form h2 {
-  font-size: 1.8rem; /* Slightly larger heading */
-  color: #dddde4;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.create-event-form input {
-  width: 100%;
-  padding: 12px; /* Increase padding for better input sizing */
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-.create-event-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #c63ee4; /* More prominent button color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.create-event-form button:hover {
-  background-color: #dd7eea;
-}
-
-.create-event-form h3 {
-  font-size: 1.4rem;
-  color: #e4d6e7;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.create-event-form div {
-  margin-bottom: 15px;
-}
-
-/* Style for the Create Event button */
-.create-event-form button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: #c63ee4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px; /* Add margin to create space between buttons */
-}
-
-.create-event-form button[type="submit"]:hover {
-  background-color: #dd7eea;
+.trash-icon-button:hover {
+  background-color: #fddede;
 }

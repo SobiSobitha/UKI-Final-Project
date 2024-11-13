@@ -36,3 +36,55 @@
     transform: rotate(360deg);
   }
 }
+body {
+  font-family: 'Roboto', sans-serif,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Replace with your chosen font */
+  background-color: #F1EEDB; /* Overall background color */
+  color: #2F314B; /* Default text color */
+  line-height: 1.6; /* Improved readability */
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif; /* Different font for headings */
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 3.5rem; /* Adjust as needed */
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  font-size: 1.25rem; /* Adjust for better readability */
+}
+
+button {
+  font-family: 'Montserrat', sans-serif; /* Consistent button font */
+  font-weight: 500;
+  padding: 0.75rem 1.5rem; /* Better padding */
+  border: none; /* Remove default button border */
+  border-radius: 30px; /* Consistent button rounding */
+  cursor: pointer; /* Pointer on hover */
+}
+button {
+  background-color: #E07A5F; /* Button background */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #D66B53; /* Darker shade on hover */
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}

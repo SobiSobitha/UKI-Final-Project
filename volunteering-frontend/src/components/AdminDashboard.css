@@ -1,94 +1,160 @@
-/* html, body {
-  height: 100%; 
-  margin: 0;   
-} */
-
+/* General Layout */
 .admin-dashboard {
-  padding: 20px;
-  color: #e70c9e;
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  height: calc(100vh - 40px); /* Set to full viewport height minus padding */
-  overflow-y: auto; /* Allow vertical scrolling */
-  background-color: rgba(219, 103, 232, 0.7); /* Semi-transparent background */
-
-}
-
-h1 {
-  text-align: center;
-  color: #dc12ba;
-}
-
-.navbar {
-  margin: 20px 0;
-}
-
-.nav-links  li {
-  display: flex;
-  justify-content: space-around;
-  color: rgb(210, 41, 41);
-}
-
-.error-message {
-  color: red;
-  margin-bottom: 20px;
-}
-
-.stats-section,
-.organizer-list,
-.user-list {
-  margin: 20px 0;
-  width: 100%; /* Ensure sections take full width */
-}
-
-.stats-container {
-  display: flex;
-  justify-content: space-between; /* Adjust if you want cards spaced evenly */
-  flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-}
-
-.stat-card {
-  background-color: #dc12ba;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 30%; /* Adjust width as needed, may change to 100% for mobile */
-  min-width: 200px; /* Minimum width for better responsiveness */
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.organizer-list,
-.user-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.organizer-list li,
-.user-list li {
-  background: #d153dd;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  padding: 8px 12px;
-  background-color: #ca39cf;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #d263cb;
-}
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .header {
+    background-color: #F1EEDB;
+    padding: 16px;
+    border-bottom: 2px solid #DE7357;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar {
+    width: 240px;
+    background-color: cornflowerblue;
+    color: #F1EEDB;
+    padding-top: 16px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.open {
+    width: 240px;
+  }
+  
+  .sidebar.closed {
+    width: 60px;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-btn {
+    text-align: left;
+    padding: 12px;
+    color: #F1EEDB;
+    font-size: 16px;
+  }
+  
+  .logout-btn {
+    color: #f1e9e8;
+    padding: 3rem;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  .stat-card {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stat-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .stat-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2F314B;
+  }
+  
+  .stat-info {
+    font-size: 14px;
+    color: #DE7357;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+  
+  .charts-and-users {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .user-card .add-user-btn {
+    color: #f6f0ef;
+  }
+  
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .status-badge.active {
+    background-color: #82B6A9;
+    color: white;
+  }
+  
+  .status-badge.inactive {
+    background-color: #DE7357;
+    color: white;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .search-input {
+    margin-left: 8px;
+    padding: 8px;
+    border: 1px solid #DE7357;
+    border-radius: 8px;
+  }
+  
+  .notification-btn {
+    position: relative;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+  }
+  

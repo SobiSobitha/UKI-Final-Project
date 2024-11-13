@@ -1,160 +1,213 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './VolunteerDashboard.css';
+'use client'
 
-const VolunteerDashboard = () => {
-    const [upcomingEvents, setUpcomingEvents] = useState([]);
-    const [currentTasks, setCurrentTasks] = useState([]);
-    const [pastEvents, setPastEvents] = useState([]);
-    const [notifications, setNotifications] = useState([]);
-    const [volunteerName, setVolunteerName] = useState(''); // State to store volunteer name
-    const navigate = useNavigate(); // Initialize useNavigate
+import { useEffect, useState } from 'react'
+import { Bell, Calendar, CheckSquare, LogOut, User } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import './VolunteerDashboard.css'; // Importing the external CSS file
 
-    // Fetch volunteer details (name)
-    useEffect(() => {
-        const fetchVolunteerDetails = async () => {
-            try {
-                // Assuming you're fetching volunteer details from an API endpoint
-                const response = await fetch('http://localhost:8001/api/volunteer/details');
-                const data = await response.json();
-                setVolunteerName(data.name); // Set volunteer name
-            } catch (error) {
-                console.error('Error fetching volunteer details:', error);
-            }
-        };
+export default function VolunteerDashboard() {
+  const [upcomingEvents, setUpcomingEvents] = useState([])
+  const [currentTasks, setCurrentTasks] = useState([])
+  const [pastEvents, setPastEvents] = useState([])
+  const [notifications, setNotifications] = useState([])
+  const [volunteerName, setVolunteerName] = useState('')
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
-        fetchVolunteerDetails();
-    }, []);
+  useEffect(() => {
+    const fetchVolunteerDetails = async () => {
+      try {
+        const response = await fetch('http://localhost:8001/api/volunteer/details')
+        const data = await response.json()
+        setVolunteerName(data.name)
+      } catch (error) {
+        console.error('Error fetching volunteer details:', error)
+      }
+    }
 
-    // Fetch upcoming events
-    useEffect(() => {
-        const fetchUpcomingEvents = async () => {
-            try {
-                const response = await fetch('http://localhost:8001/api/volunteer/upcoming-events');
-                const data = await response.json();
-                setUpcomingEvents(data);
-            } catch (error) {
-                console.error('Error fetching upcoming events:', error);
-            }
-        };
+    const fetchUpcomingEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:8001/api/volunteer/upcoming-events')
+        const data = await response.json()
+        setUpcomingEvents(data)
+      } catch (error) {
+        console.error('Error fetching upcoming events:', error)
+      }
+    }
 
-        fetchUpcomingEvents();
-    }, []);
+    const fetchCurrentTasks = async () => {
+      try {
+        const response = await fetch('http://localhost:8001/api/volunteer/current-tasks')
+        const data = await response.json()
+        setCurrentTasks(data)
+      } catch (error) {
+        console.error('Error fetching current tasks:', error)
+      }
+    }
 
-    // Fetch current tasks
-    useEffect(() => {
-        const fetchCurrentTasks = async () => {
-            try {
-                const response = await fetch('http://localhost:8001/api/volunteer/current-ttasks');
-                const data = await response.json();
-                setCurrentTasks(data);
-            } catch (error) {
-                console.error('Error fetching current tasks:', error);
-            }
-        };
+    const fetchPastEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:8001/api/volunteer/past-events')
+        const data = await response.json()
+        setPastEvents(data)
+      } catch (error) {
+        console.error('Error fetching past events:', error)
+      }
+    }
 
-        fetchCurrentTasks();
-    }, []);
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch('http://localhost:8001/api/volunteer/notifications')
+        const data = await response.json()
+        setNotifications(data)
+      } catch (error) {
+        console.error('Error fetching notifications:', error)
+      }
+    }
 
-    // Fetch past events
-    useEffect(() => {
-        const fetchPastEvents = async () => {
-            try {
-                const response = await fetch('http://localhost:8001/api/volunteer/past-events');
-                const data = await response.json();
-                setPastEvents(data);
-            } catch (error) {
-                console.error('Error fetching past events:', error);
-            }
-        };
+    fetchVolunteerDetails()
+    fetchUpcomingEvents()
+    fetchCurrentTasks()
+    fetchPastEvents()
+    fetchNotifications()
+  }, [])
 
-        fetchPastEvents();
-    }, []);
+  const handleLogout = () => {
+    // Add logout logic here (if needed)
+    alert("Logging out...")
+    navigate('/') // Navigate to the home page
+  }
 
-    // Fetch notifications
-    useEffect(() => {
-        const fetchNotifications = async () => {
-            try {
-                const response = await fetch('http://localhost:8001/api/volunteer/notifications');
-                const data = await response.json();
-                setNotifications(data);
-            } catch (error) {
-                console.error('Error fetching notifications:', error);
-            }
-        };
+  const handleLeaveFeedback = (eventId) => {
+    // Navigate to feedback page for the selected event
+    navigate(`/feedback/:eventId`) // Assuming the feedback page accepts an event ID as a query parameter
+  }
 
-        fetchNotifications();
-    }, []);
+  const handleViewOpportunities = () => {
+    navigate('/events') // Navigate to the events page
+  }
 
-    // Handle logout
-    const handleLogout = () => {
-        // Add any logout logic here (e.g., clearing user data, tokens, etc.)
-        alert("Logging out...");
-        navigate('/'); // Redirect to home page
-    };
-
-    return (
-        <div className="dashboard">
-            <h1>Welcome, {volunteerName ? volunteerName : 'Volunteer'}!</h1> {/* Use the volunteer's name */}
-
-            <section>
-                <h2>Upcoming Events:</h2>
-                <ul>
-                    {upcomingEvents.map(event => (
-                        <li key={event.id}>
-                            {event.title} - Date: {event.date} | Location: {event.location}
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            <section>
-                <h2>Current Tasks:</h2>
-                <ul>
-                    {currentTasks.map(task => (
-                        <li key={task.id}>
-                            {task.task} - Status: {task.status}
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            <section>
-    <h2>Past Events:</h2>
-    <ul>
-        {pastEvents.map(event => (
-            <li key={event.id}>
-                {event.title} - <Link to={`/feedback/${event.id}`} className="white-link">Leave Feedback</Link>
-            </li>
-        ))}
-    </ul>
-</section>
-
-
-            <section>
-                <h2>Notifications:</h2>
-                <ul>
-                    {notifications.map((notification, index) => (
-                        <li key={index}>
-                            {notification.message}
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            <div className="dashboard-actions">
-                <button onClick={() => alert("View Available Opportunities")}>
-                    View Available Opportunities
-                </button>
-                <button onClick={() => alert("Edit Profile")}>
-                    Edit Profile
-                </button>
-                <button onClick={handleLogout}>
-                    Logout
-                </button>
+  return (
+    <div className="dashboard-container">
+      <div className="dashboard-content">
+        <div className="header">
+          <div className="header-left">
+            {/* <div className="avatar-container">
+              <img src="/untitled design.png?height=50&width=50" alt={volunteerName} className="avatar-image" />
+              <span className="avatar-fallback">{volunteerName.charAt(0)}</span>
+            </div> */}
+            <div>
+              <h1 className="header-title">Welcome, {volunteerName || 'Volunteer'}!</h1>
+              <p className="header-subtitle">Volunteer Dashboard</p>
             </div>
+          </div>
+          <button onClick={handleLogout} className="logout-btn">
+            <LogOut className="mr-2 h-4 w-4" /> Logout
+          </button>
         </div>
-    );
-};
 
-export default VolunteerDashboard;
+        <div className="tabs-container">
+          <div className="tabs-list">
+            <button>Upcoming Events</button>
+            <button>Current Tasks</button>
+            <button>Past Events</button>
+            <button>Notifications</button>
+          </div>
+          <div className="tabs-content">
+            {/* Upcoming Events */}
+            <div>
+              <div className="card-header">
+                <h2 className="flex items-center">
+                  <Calendar className="mr-2" style={{ color: '#E27D60' }} />
+                  Upcoming Events
+                </h2>
+              </div>
+              <div className="card-content">
+                <ul className="space-y-2">
+                  {upcomingEvents.map(event => (
+                    <li key={event.id} className="card-item">
+                      <span>{event.title}</span>
+                      <span className="text-sm">{event.date} | {event.location}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Current Tasks */}
+            <div>
+              <div className="card-header">
+                <h2 className="flex items-center">
+                  <CheckSquare className="mr-2" style={{ color: '#E27D60' }} />
+                  Current Tasks
+                </h2>
+              </div>
+              <div className="card-content">
+                <ul className="space-y-2">
+                  {currentTasks.map(task => (
+                    <li key={task.id} className="card-item">
+                      <span>{task.task}</span>
+                      <span className="text-sm">Status: {task.status}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Past Events */}
+            <div>
+              <div className="card-header">
+                <h2 className="flex items-center">
+                  <Calendar className="mr-2" style={{ color: '#E27D60' }} />
+                  Past Events
+                </h2>
+              </div>
+              <div className="card-content">
+                <ul className="space-y-2">
+                  {pastEvents.map(event => (
+                    <li key={event.id} className="card-item">
+                      <span>{event.title}</span>
+                      <button 
+                        style={{ color: '#E27D60' }} 
+                        onClick={() => handleLeaveFeedback(event.id)}
+                      >
+                        Leave Feedback
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Notifications */}
+            <div>
+              <div className="card-header">
+                <h2 className="flex items-center">
+                  <Bell className="mr-2" style={{ color: '#E27D60' }} />
+                  Notifications
+                </h2>
+              </div>
+              <div className="card-content">
+                <ul className="space-y-2">
+                  {notifications.map((notification, index) => (
+                    <li key={index} className="card-item">
+                      {notification.message}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center space-x-4">
+          <button className="tabs-button" onClick={handleViewOpportunities}>
+            View Available Opportunities
+          </button>
+          <button className="profile-button">
+            <User className="mr-2 h-4 w-4" /> Edit Profile
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}

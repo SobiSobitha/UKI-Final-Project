@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import AboutUs from './components/AboutUs';
-import Volunteerpro from './components/VolunteerPro';
+// import Volunteerpro from './components/VolunteerPro';
 import ContactUs from './components/ContactUs';
 import RegisterForm from './components/RegisterForm';
 import EventList from './components/EventList';
@@ -33,7 +33,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/volunteerpro" element={<Volunteerpro />} />
+            {/* <Route path="/volunteerpro" element={<Volunteerpro />} /> */}
             <Route path="/login" element={<LoginForm />} />
             <Route path="/events" element={<EventList />} />
             <Route path="/create-event" element={<CreateEventForm />} />

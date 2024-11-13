@@ -1,145 +1,137 @@
-/* .login-page {
+
+
+/* Container for the login form */
+.login-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  color: #3f10eb;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  color: #ccc;
-  box-shadow: 0 0 10px rgba(194, 98, 198, 0.1);
-  background-color: rgba(68, 0, 77, 0.7);
-}
-
-label {
-  margin-bottom: 10px;
-  color: white;
-}
-
-input {
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
-button[type="submit"] {
-  background-color: #9d4caf;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #d4a2d9;
-} */
-
-
-/* LoginForm.css */
-
-.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-  padding: 20px;
+  align-items: center;
+  height: 100vh;
 }
 
-.login-page h1 {
-  color: #ad17ad;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-form {
-  background-color: #fff;
+/* Box containing the form */
+.login-box {
+  background-color:#dae8e3;
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  position: relative;
 }
 
-form label {
-  display: block;
-  margin-bottom: 15px;
-  color: #333;
-  font-size: 0.9rem;
-}
-
-form input[type="email"],
-form input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-form input[type="email"]:focus,
-form input[type="password"]:focus {
-  outline: none;
-  border-color: #6200ea;
-  box-shadow: 0 0 5px rgba(98, 0, 234, 0.3);
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  font-size: 1rem;
+/* Title of the login form */
+.login-title {
+  font-size: 24px;
+  color: #223D6C;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
   font-weight: bold;
+  text-align: center;
+  position: sticky;
+}
+
+/* Form styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 89%;
+}
+
+/* Input group styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.input-label {
+  font-size: 14px;
+  color: #223D6C;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+.input-field {
+  padding: 10px;
+  border: 1px solid #88B0A2;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #223D6C;
+  outline: none;
+}
+
+/* Input field focus styling */
+.input-field:focus {
+  border-color: #E97451;
+  box-shadow: 0 0 5px rgba(233, 116, 81, 0.5);
+}
+
+/* Alert message styling */
+.alert {
+  background-color: #FFEBEB;
+  color: #D9534F;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Submit button styling */
+/* Submit button styling */
+.login-button {
+  background-color: #E97451 !important; /* Use !important to ensure no other style overrides it */
   color: #fff;
-  background-color: #6200ea;
   border: none;
-  border-radius: 5px;
+  padding: 12px;
+  font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #3700b3;
+/* Hover effect for the submit button */
+.login-button:hover {
+  background-color: #D76642 !important; /* Ensuring the hover effect color is coral */
 }
 
-button[type="submit"]:disabled {
-  background-color: #bbb;
+/* Disabled button styling */
+.login-button:disabled {
+  background-color: #D1D1D1;
   cursor: not-allowed;
 }
 
-.error {
-  color: red;
-  margin-top: 5px;
-  font-size: 0.9rem;
-}
 
-p {
-  margin-top: 20px;
-  color: #555;
-  font-size: 0.9rem;
+/* Register section styling */
+.register-section {
   text-align: center;
-}
-
-p a {
-  color: #6200ea;
-  text-decoration: none;
+  margin-top: 20px;
   font-weight: bold;
-  margin: 0 5px;
 }
 
-p a:hover {
-  text-decoration: underline;
+/* Register link styling */
+.register-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.register-link {
+  color:#88B0A2;
+  text-decoration: none;
+  font-weight:bolder;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #223D6C;
+}
+
+.register-section p {
+  color: #223D6C;
+  font-size: 14px;
 }

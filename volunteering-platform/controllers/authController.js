@@ -36,16 +36,23 @@ export const register = async (req, res) => {
         // Generate a token
         const token = jwt.sign({ userId: newUser._id, role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
+        // Return the full user data and token
         return res.status(201).json({
             message: "User created successfully",
             token,
-            role // Return the user's role
+            user: { // Return complete user data (excluding sensitive data)
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role
+            }
         });
     } catch (err) {
         console.error('Error registering user:', err);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 // Login function
 export const login = async (req, res) => {

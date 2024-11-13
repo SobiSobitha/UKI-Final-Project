@@ -1,83 +1,95 @@
-/* html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #5b0cda; 
-  overflow-y: hidden; 
-
-
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 50px;
-  height: 100vh; 
-} */
-
 .event-list-container {
   padding: 20px;
-  /* background-color: #f9f9f9;  */
-  /* background-color: rgba(68, 0, 77, 0.7); Semi-transparent background */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  max-height: 100vh; /* Limit the height of the container */
-  overflow-y: auto; /* Enable vertical scrolling */
-  width: 100%; /* Make container take full width of its parent */
-  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
-
+  max-height: 100vh;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
-.event-list {
+.event-list-container h1{
+  text-align: center;
+  color: #2F314B;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.event-table th,
+.event-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #223D6C; /* Dark Blue border */
+}
+
+.event-table th {
+  background-color: #E97451; /* Coral for table header */
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.event-table td {
+  background-color: #FDF5E6; /* Light Cream for table rows */
+  color: #223D6C; /* Dark Blue text color */
+}
+
+.event-table td .roles {
   display: flex;
-  flex-direction: column; /* Arrange events in a column */
-  gap: 20px; /* Space between events */
-  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
-
+  flex-direction: column;
+  gap: 5px;
 }
 
-.event-card {
-  padding: 15px; /* Padding inside each event card */
-  background-color: #9e1111; /* White background for each event */
-  border: 1px solid #dd2f2f; /* Light border */
-  border-radius: 5px; /* Rounded corners */
-  transition: transform 0.2s; /* Smooth transform on hover */
-  background-color: rgba(68, 0, 77, 0.7); /* Semi-transparent background */
-  color: black;
-
-}
-.event-card h2{
-  color: purple;
-}
-.event-card p{
-  color: purple;
-}
-.event-card:hover {
-  transform: scale(1.02); /* Slightly scale up on hover */
+.event-table td .see-more {
+  padding: 8px 16px;
+  background-color: #D3D3D3; /* Light color by default */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: not-allowed; /* Disabled cursor */
+  transition: background-color 0.3s;
 }
 
-.role-selection {
-  margin-top: 10px; /* Margin above the role selection */
+.event-table td .see-more.active {
+  background-color: #2F314B; /* Purple color for active button */
+  cursor: pointer;
 }
 
-.role-item {
-  display: flex; /* Flexbox for alignment */
-  align-items: center; /* Center items vertically */
+.event-table td .see-more.active:hover {
+  background-color: #88B0A2; /* Mint Green hover effect */
 }
 
-.role-item input {
-  margin-right: 10px; /* Space between checkbox and label */
+.event-table td .see-more.inactive:hover {
+  background-color: #D3D3D3; /* No change on hover when inactive */
 }
 
+/* Error and Loading Styles */
 .loading {
-  text-align: center; /* Center the loading message */
-  font-size: 1.2rem; /* Larger text for visibility */
+  text-align: center;
+  font-size: 1.2rem;
+  color: #223D6C;
 }
 
 .error {
-  text-align: center; /* Center the error message */
-  color: red; /* Red text for error */
-  font-size: 1.2rem; /* Larger text for visibility */
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+}
+
+/* Button for back to home */
+.back-to-home {
+  background-color: #2F314B !important; /* Purple for the back-to-home button */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.back-to-home:hover {
+  background-color: #9fd7c4; /* Mint Green hover */
+  color: #E97451;
 }

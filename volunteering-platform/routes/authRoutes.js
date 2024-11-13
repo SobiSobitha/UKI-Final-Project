@@ -31,13 +31,23 @@ router.post('/register/volunteer', async (req, res) => {
 
       const token = jwt.sign({ id: newUser._id, role: newUser.role }, JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '1h' });
 
-      res.status(201).json({ success: true, message: 'Volunteer registration successful.', token });
+      res.status(201).json({
+        success: true,
+        message: 'Volunteer registration successful.',
+        token,
+        user: { // Add user data in response
+          id: newUser._id,
+          name: newUser.name,
+          username: newUser.username,
+          email: newUser.email,
+          role: newUser.role
+        }
+      });
   } catch (err) {
       console.error(err);
       res.status(500).json({ success: false, error: 'Server error. Please try again.', details: err.message });
   }
 });
-
 
 
 // Register as Organizer
