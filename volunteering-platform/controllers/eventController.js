@@ -1,8 +1,9 @@
-import Event from '../models/Event.js';
-import User from '../models/User.js';
+const Event = require('../models/Event.js');
+const User = require('../models/User.js');
+const Notification = require('../models/Notification.js');
 
 // Create Event with Validation
-export const createEvent = async (req, res) => {
+exports.createEvent = async (req, res) => {
     console.log('User:', req.user); // Log the user object
     const { title, description, location, date, roles, tasks } = req.body;
 
@@ -39,9 +40,8 @@ export const createEvent = async (req, res) => {
     }
 };
 
-
 // Get All Events with createdBy populated and roles intact
-export const getAllEvents = async (req, res) => {
+exports.getAllEvents = async (req, res) => {
     try {
         const events = await Event.find()
             .populate('createdBy', 'name'); // Populate organizer name
@@ -52,7 +52,7 @@ export const getAllEvents = async (req, res) => {
 };
 
 // Get Single Event with detailed volunteer info and organizer
-export const getEvent = async (req, res) => {
+exports.getEvent = async (req, res) => {
     try {
         const event = await Event.findById(req.params.id)
             .populate('createdBy', 'name') // Populate createdBy for organizer name
@@ -65,9 +65,8 @@ export const getEvent = async (req, res) => {
     }
 };
 
-
 // Update Event
-export const updateEvent = async (req, res) => {
+exports.updateEvent = async (req, res) => {
     const { title, description, location, date, roles, tasks } = req.body;
 
     // Check if the user is authorized to update an event
@@ -96,7 +95,7 @@ export const updateEvent = async (req, res) => {
 };
 
 // Delete Event
-export const deleteEvent = async (req, res) => {
+exports.deleteEvent = async (req, res) => {
     // Check if the user is authorized to delete an event
     if (!req.user || req.user.role !== 'Organizer') {
         return res.status(403).json({ error: 'Access denied: Only organizers can delete events' });
@@ -112,7 +111,7 @@ export const deleteEvent = async (req, res) => {
 };
 
 // Register for a role and task (Volunteers)
-export const registerForRole = async (req, res) => {
+exports.registerForRole = async (req, res) => {
     const { eventId, userId, role, task } = req.body;
 
     try {
@@ -139,6 +138,14 @@ export const registerForRole = async (req, res) => {
         event.volunteers.push({ user: userId, role, task });
         await event.save();
 
+        // Create a notification for the organizer
+        const organizerId = event.createdBy;
+        await Notification.create({
+            organizerId,
+            message: `Volunteer ${user.name} has selected your event: ${event.title}`,
+            timestamp: new Date()
+        });
+
         res.status(201).json({ message: 'Registered successfully for the event!' });
     } catch (err) {
         res.status(500).json({ message: 'Server error. Please try again.' });
@@ -146,7 +153,7 @@ export const registerForRole = async (req, res) => {
 };
 
 // Remove role and task from an event (Organizer only)
-export const removeRoleTask = async (req, res) => {
+exports.removeRoleTask = async (req, res) => {
     const { eventId, userId } = req.body;
 
     // Check if the user is authorized to remove roles/tasks
@@ -175,14 +182,4 @@ export const removeRoleTask = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: 'Server error. Please try again.' });
     }
-};
-
-export default {
-    createEvent,
-    getAllEvents,
-    getEvent,
-    updateEvent,
-    deleteEvent,
-    registerForRole,
-    removeRoleTask
 };

@@ -1,35 +1,38 @@
 const express = require('express');
-const Event = require('../models/Event');
-const User = require('../models/User');
 const router = express.Router();
+const Event = require('../models/Event');
+const Notification = require('../models/Notification');
+const User = require('../models/User');
+const {
+  registerVolunteerToEvent,
+  createNotificationForOrganizer,
+  fetchNotificationsForOrganizer
+} = require('../controllers/eventController');
 
 // Middleware to check if user is an approved organizer
 const isApprovedOrganizer = async (req, res, next) => {
   const { createdBy } = req.body;
 
-  console.log('Created By ID:', createdBy); // Debug log
-
   try {
-    // Check if the user exists in the User collection
     const organizer = await User.findById(createdBy);
     if (!organizer) {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Check if the user is an approved organizer
     if (organizer.role !== 'Organizer' || !organizer.isApproved) {
       return res.status(403).json({ message: 'Only approved organizers can create events.' });
     }
 
     next();
   } catch (error) {
-    console.error('Server error in isApprovedOrganizer:', error); // Debug log
+    console.error('Error in isApprovedOrganizer:', error);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 };
 
+// Route to create an event
 router.post('/create-event', isApprovedOrganizer, async (req, res) => {
-  const { title, description, date, location, roles, tasks, createdBy } = req.body; // Removed paymentPlan
+  const { title, description, date, location, roles, tasks, createdBy } = req.body;
 
   try {
     const newEvent = new Event({
@@ -40,7 +43,7 @@ router.post('/create-event', isApprovedOrganizer, async (req, res) => {
       roles,
       tasks,
       createdBy,
-      status: 'pending', 
+      status: 'pending'
     });
 
     await newEvent.save();
@@ -51,95 +54,29 @@ router.post('/create-event', isApprovedOrganizer, async (req, res) => {
   }
 });
 
-
-
-// Payment completion endpoint (update event status)
-router.post('/complete-payment/:eventId', async (req, res) => {
-  const { eventId } = req.params;
+// Route for volunteer selecting an event
+router.post('/select-event', async (req, res) => {
+  const { volunteerId, eventId } = req.body;
 
   try {
-    // Find the event by ID and update its status to "active"
-    const event = await Event.findByIdAndUpdate(eventId, { status: 'active' }, { new: true });
-
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found.' });
-    }
-
-    res.status(200).json({ message: 'Payment completed successfully! Event is now active.', event });
+    await registerVolunteerToEvent(volunteerId, eventId);
+    await createNotificationForOrganizer(eventId, volunteerId);
+    res.status(200).send({ message: 'Event selection recorded and organizer notified' });
   } catch (err) {
-    console.error('Server error in complete-payment:', err);
+    console.error('Error in select-event:', err);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 });
 
-
-// Register for a role and task (Volunteers)
-router.post('/register-role', async (req, res) => {
-  const { eventId, userId, role, task } = req.body;
-
-  console.log('Registering role and task:', req.body); // Debug log
+// Route to get notifications for an organizer
+router.get('/organizer-notifications/:organizerId', async (req, res) => {
+  const { organizerId } = req.params;
 
   try {
-    // Check if the user exists in the User collection
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User ID not found.' });
-    }
-
-    // Find the event
-    const event = await Event.findById(eventId);
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found.' });
-    }
-
-    // Check if the role/task is available
-    const availableRole = event.roles.includes(role);
-    const availableTask = event.tasks.includes(task);
-    if (!availableRole || !availableTask) {
-      return res.status(400).json({ message: 'Role or task not available.' });
-    }
-
-    // Register the volunteer for the role and task
-    event.volunteers.push({ user: userId, role, task });
-    await event.save();
-
-    res.status(201).json({ message: 'Registered successfully for the event!' });
+    const notifications = await fetchNotificationsForOrganizer(organizerId);
+    res.json(notifications);
   } catch (err) {
-    console.error('Server error in register-role:', err); // Debug log
-    res.status(500).json({ message: 'Server error. Please try again.' });
-  }
-});
-
-// Remove role and task from an event (Organizer only)
-router.post('/remove-role-task', isApprovedOrganizer, async (req, res) => {
-  const { eventId, userId } = req.body;
-
-  try {
-    // Check if the user exists in the User collection
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User ID not found.' });
-    }
-
-    // Find the event
-    const event = await Event.findById(eventId);
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found.' });
-    }
-
-    // Find the volunteer in the event
-    const volunteerIndex = event.volunteers.findIndex(v => v.user.toString() === userId);
-    if (volunteerIndex === -1) {
-      return res.status(404).json({ message: 'Volunteer not found in this event.' });
-    }
-
-    // Remove the volunteer's role and task
-    event.volunteers.splice(volunteerIndex, 1);
-    await event.save();
-
-    res.json({ message: 'Volunteer role and task removed from the event.' });
-  } catch (err) {
-    console.error('Server error in remove-role-task:', err); // Debug log
+    console.error('Error fetching notifications:', err);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 });
@@ -150,17 +87,17 @@ router.get('/', async (req, res) => {
     const events = await Event.find();
     res.json(events);
   } catch (err) {
-    console.error('Server error in fetch all events:', err);
+    console.error('Error fetching events:', err);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 });
 
-// Fetch event details including volunteers (Organizer only)
+// Fetch specific event details including volunteers and organizer
 router.get('/:id', async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
-      .populate('volunteers.user', 'name email') // Populating volunteer details
-      .populate('createdBy', 'name organizationName'); // Populating organizer details
+      .populate('volunteers.user', 'name email')
+      .populate('createdBy', 'name organizationName');
 
     if (!event) {
       return res.status(404).json({ message: 'Event not found.' });
@@ -168,10 +105,9 @@ router.get('/:id', async (req, res) => {
 
     res.json(event);
   } catch (err) {
-    console.error('Server error in get event details:', err);
+    console.error('Error fetching event details:', err);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
 });
-
 
 module.exports = router;

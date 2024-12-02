@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
     role: {
         type: String,
         enum: ['volunteer', 'Organizer'],
@@ -40,6 +41,25 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    loginCount: { type: Number, default: 1 },
+});
+
+// Virtual field for confirmPassword (not stored in DB)
+userSchema.virtual('confirmPassword')
+    .get(function () {
+        return this._confirmPassword;
+    })
+    .set(function (value) {
+        this._confirmPassword = value;
+    });
+
+// Pre-save hook to validate password and confirmPassword match
+userSchema.pre('save', function (next) {
+    if (this.password !== this._confirmPassword) {
+        const error = new Error('Passwords do not match');
+        return next(error);
+    }
+    next();
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -121,7 +121,93 @@ router.post('/login', async (req, res) => {
       return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+router.post('/api/auth/login', async (req, res) => {
+  const { email, password } = req.body;
 
+  try {
+    // Find user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found.' });
+    }
+
+    // Check if account is blocked
+    if (user.isBlocked) {
+      return res.status(403).json({
+        success: false,
+        message: 'Your account has been blocked. Please contact support.',
+      });
+    }
+
+    // Verify password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+    }
+
+    // Increment login count for organizer
+    if (user.role === 'organizer') {
+      user.loginCount += 1;
+
+      if (user.loginCount > 1) {
+        user.isBlocked = true; // Block account after the first login
+        await user.save();
+        return res.status(403).json({
+          success: false,
+          message:
+            'Your account has been blocked after the first login. Please contact support.',
+        });
+      }
+
+      await user.save();
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
+      expiresIn: '1d',
+    });
+
+    res.status(200).json({
+      success: true,
+      token,
+      user: { email: user.email, role: user.role, isBlocked: user.isBlocked },
+    });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ success: false, message: 'Server error.' });
+  }
+});
+
+router.post('/api/auth/block-account', async (req, res) => {
+   const { email } = req.body; // Destructure email from the request body
+
+  try {
+      // Find the user by email
+      const user = await User.findOne({ email });
+
+      if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found.' });
+      }
+
+      // Check if the account is already blocked
+      if (user.isBlocked) {
+          return res.status(400).json({ success: false, message: 'Account is already blocked.' });
+      }
+
+      // Block the account
+      user.isBlocked = true;
+      await user.save();
+
+      res.status(200).json({
+          success: true,
+          message: `Account for ${email} has been blocked.`,
+      });
+  } catch (error) {
+      console.error('Error blocking account:', error);
+      res.status(500).json({ success: false, message: 'Server error.' });
+  }
+});
 
 // Admin approval for organizers
 router.post('/approve-organizer/:id', async (req, res) => {
