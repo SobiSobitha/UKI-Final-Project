@@ -7,7 +7,7 @@
 
 .manage-volunteers-container {
   padding: 20px;
-  color: cornflowerblue;
+  color: #41436A;
   display: flex;
   flex-direction: column;
   align-items: center; /* Center content horizontally */
@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: cornflowerblue;
+  color: #41436A;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -66,13 +66,13 @@
 
 .volunteer-details h2 {
   margin-bottom: 10px;
-  color: cornflowerblue;
+  color: #41436A;
   font-weight: bold;
 }
 
 .volunteer-details p {
   margin: 5px 0;
-  color: cornflowerblue;
+  color: #41436A;
   font-weight: bold;
 }
 
@@ -107,17 +107,17 @@
 }
 
 /* Modal content styling */
-.modal-content {
+.view-modal{
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 300px;
+  width: 400px;
   position: relative;
   text-align: center;
 }
 
 /* Edit Volunteer Form */
-.modal-content form {
+.view-modal form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -126,15 +126,15 @@
 }
 
 /* Label styles */
-.modal-content label {
-  color: cornflowerblue;
+.view-modal label {
+  color: #41436A;
   font-weight: bold;
 }
 
 /* Input field styles */
-.modal-content input {
+.view-modal input {
   padding: 10px;
-  border: 1px solid cornflowerblue;
+  border: 1px solid #41436A;
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s;
@@ -142,13 +142,13 @@
 }
 
 /* Input field focus effect */
-.modal-content input:focus {
+.view-modal input:focus {
   border-color: cornflowerblue;
   box-shadow: 0 0 5px coral;
 }
 
 /* Button styles */
-.modal-content button {
+.view-modal button {
   padding: 10px;
   background: linear-gradient(90deg, #ff7f50 0%, #d67c5b 100%);
   color: white;
@@ -161,7 +161,7 @@
 }
 
 /* Button hover effect */
-.modal-content button:hover {
+.view-modal button:hover {
   background: linear-gradient(90deg, #d67c5b 0%, #ff7f50 100%);
 }
 
@@ -216,4 +216,25 @@
 
 .modal-actions button:hover {
   background: linear-gradient(90deg, #d67c5b 0%, #ff7f50 100%);
+}
+.volunteer-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Adjust background as needed */
+  overflow: hidden;
+}
+
+.volunteer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.volunteer-avatar span {
+  font-size: 20px;
+  color: #555;
 }

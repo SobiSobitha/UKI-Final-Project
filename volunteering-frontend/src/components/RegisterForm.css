@@ -1,17 +1,17 @@
 /* Container for the register form */
-.register-container {
+/* .register-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #FDF5E6;
   padding: 20px;
-}
+} */
 
 /* Card containing the register form */
 .register-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 3500px;
   background-color: #dae8e3;
   padding: 30px;
   border-radius: 8px;
@@ -132,4 +132,10 @@
 
 .login-link:hover {
   color: #82B6A9;
+}
+.password-message {
+  font-size: 0.9rem;
+  color: #ff6b6b;
+  margin-top: 4px;
+  display: block;
 }

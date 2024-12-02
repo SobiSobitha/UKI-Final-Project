@@ -18,10 +18,12 @@ const Header = () => {
     width: '100%',
     zIndex: 95,
     transition: 'all 0.5s ease',
+    backgroundColor: '#2F314B',
+
   };
 
   const containerStyle = {
-    maxWidth: '1200px',
+    maxWidth: '1660px',
     margin: '0 auto',
     padding: '0 2rem',
     display: 'flex',
@@ -33,13 +35,13 @@ const Header = () => {
   const logoStyle = {
     fontSize: '2rem',
     fontWeight: 'bold',
-    color: '#6495ED',
+    color: '#FDF5E6',
     textDecoration: 'none',
     transition: 'color 0.3s ease',
   };
 
   const linkStyle = {
-    color: '#6495ED',
+    color: '#FDF5E6',
     textDecoration: 'none',
     fontWeight: '900',
   };
@@ -55,10 +57,10 @@ const Header = () => {
         </nav>
         <div style={{ display: 'flex' }}>
           <a href="/login">
-            <button style={{ backgroundColor: 'transparent', color: '#6495ED', marginRight: '0.5rem' }}>Sign In</button>
+            <button style={{ backgroundColor: 'transparent', color: '#FDF5E6', marginRight: '0.5rem' }}>Sign In</button>
           </a>
           <a href="/register">
-            <button style={{ backgroundColor: '#E07A5F', color: '#6495ED', borderRadius: '30px' }}>Register</button>
+            <button style={{ backgroundColor: 'coral', color: '#FDF5E6', borderRadius: '30px' }}>Register</button>
           </a>
         </div>
       </div>

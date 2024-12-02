@@ -223,5 +223,17 @@ const handleError = (error) => {
     }
     throw error;
 };
+/**
+ * Block a user account after the session
+ * @param {String} email - Email of the user to be blocked
+ */
+export const blockAccount = async (email) => {
+    try {
+        const response = await API.post('/auth/block-account', { email });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
 
 export default API;

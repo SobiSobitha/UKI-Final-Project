@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from './Header'; // Import the Header component
+import Footer from './Footer'; // Import the Footer component
 import './CreateEventForm.css';
 
 const CreateEventForm = () => {
@@ -122,11 +124,13 @@ const CreateEventForm = () => {
 
   return (
     <div className="create-event-wrapper">
+      <Header/>
       <div className="create-event-card">
         <div className="create-event-card-header">
           <h2 className="create-event-card-title">Create Event</h2>
         </div>
         <div className="create-event-card-content">
+          <h3>Here You can create the Events</h3>
           <form onSubmit={handleSubmit} className="create-event-form">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             
@@ -208,6 +212,7 @@ const CreateEventForm = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

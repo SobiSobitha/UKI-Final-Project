@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Replaced useHistory with useNavigate
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './LoginForm.css';
 
@@ -8,31 +8,33 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // useNavigate for routing
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
 
+    // Validate required fields
     if (!email || !password) {
-      setError('Please fill in both fields');
+      setError('Please fill in all fields.');
       return;
     }
 
+    // Validate email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      setError('Please enter a valid email address');
+      setError('Please enter a valid email address.');
       return;
     }
 
     setLoading(true);
 
-    // Check for admin credentials
+    // Admin login credentials check
     if (email === 'sobi@gmail.com' && password === 'sobi') {
-      // Simulate successful login for the admin
       localStorage.setItem('token', 'admin-token');
       localStorage.setItem('role', 'admin');
-      navigate('/admin'); // Redirect to admin dashboard
+      navigate('/admin');
+      setLoading(false);
       return;
     }
 
@@ -46,7 +48,7 @@ export default function LoginForm() {
       const responseData = await response.json();
 
       if (response.status === 403) {
-        setError('Your account is pending admin approval.');
+        setError('Your account has been blocked or is pending admin approval.');
         return;
       }
 
@@ -58,23 +60,40 @@ export default function LoginForm() {
       if (responseData.success && responseData.token) {
         const { token, user } = responseData;
 
+        // Save token and role in localStorage
         localStorage.setItem('token', token);
+        const userRole = user.role.trim().toLowerCase();
+        localStorage.setItem('role', userRole);
 
-        if (user && user.role) {
-          const userRole = user.role.trim().toLowerCase();
-          localStorage.setItem('role', userRole);
-
-          if (userRole === 'organizer') {
-            navigate('/organizer-dashboard');
-          } else if (userRole === 'volunteer') {
-            navigate('/events');
-          } else {
-            console.error('Role not recognized:', userRole);
-            setError('Login failed. Please try again.');
+        // Organizer-specific logic
+        if (userRole === 'organizer') {
+          if (user.isBlocked) {
+            setError('Your account has been blocked. Please contact support.');
+            return;
           }
+
+          if (user.loginCount === 1) {
+            // Notify user of auto-block and block account
+            setError(
+              'Your account will be blocked after this session. Please contact support for further access.'
+            );
+
+            // Call backend to block the account after this session
+            await fetch('http://localhost:8001/api/auth/block-account', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email }),
+            });
+
+            // Navigate to organizer dashboard
+            navigate('/organizer-dashboard');
+          } else {
+            navigate('/organizer-dashboard');
+          }
+        } else if (userRole === 'volunteer') {
+          navigate('/events');
         } else {
-          console.error('User role is undefined');
-          setError('Role information is missing from the response.');
+          setError('Role not recognized. Please try again.');
         }
       } else {
         setError('Login failed. Please try again.');

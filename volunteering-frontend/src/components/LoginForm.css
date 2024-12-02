@@ -1,24 +1,25 @@
 
 
-/* Container for the login form */
-.login-container {
+/* Ensures the title and form are aligned */
+/* .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
+  height: 50vh; 
+  background-color: #f3f6f9; 
+} */
 
 /* Box containing the form */
 .login-box {
-  background-color:#dae8e3;
+  background-color: #dae8e3;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  width: 100%; /* Adjusted for responsiveness */
+  max-width: 3500px; /* Proper alignment for the box */
+  margin: 0 auto; /* Center the box horizontally */
   position: relative;
 }
-
 /* Title of the login form */
 .login-title {
   font-size: 24px;
@@ -135,3 +136,13 @@
   color: #223D6C;
   font-size: 14px;
 }
+.message-box {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #ff6b6b; /* Red for error */
+}
+
+.message-box:contains("Passwords match ") {
+  color: #28a745; /* Green for success */
+}
+

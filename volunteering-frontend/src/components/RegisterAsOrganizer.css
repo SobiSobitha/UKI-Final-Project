@@ -1,5 +1,4 @@
-/* Container for the register form */
-.register-container {
+/* .register-contain {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +7,6 @@
   padding: 20px;
 }
 
-/* Box containing the register form */
 .register-box {
   background-color: #dae8e3;
   padding: 30px;
@@ -19,7 +17,6 @@
   position: relative;
 }
 
-/* Title of the register form */
 .register-title {
   font-size: 24px;
   color: #223D6C;
@@ -28,7 +25,6 @@
   font-weight: bold;
 }
 
-/* Form description */
 .register-description {
   text-align: center;
   color: #223D6C;
@@ -36,7 +32,6 @@
   font-size: 14px;
 }
 
-/* Form styling */
 .register-form {
   display: flex;
   flex-direction: column;
@@ -44,13 +39,11 @@
   width: 100%;
 }
 
-/* Input group styling */
 .input-group {
   display: flex;
   flex-direction: column;
 }
 
-/* Label styling */
 .input-label {
   font-size: 14px;
   color: #223D6C;
@@ -58,7 +51,6 @@
   font-weight: bold;
 }
 
-/* Input field styling */
 .input-field {
   padding: 10px;
   border: 1px solid #88B0A2;
@@ -68,13 +60,11 @@
   outline: none;
 }
 
-/* Input field focus styling */
 .input-field:focus {
   border-color: #E97451;
   box-shadow: 0 0 5px rgba(233, 116, 81, 0.5);
 }
 
-/* Alert message styling */
 .alert {
   background-color: #FFEBEB;
   color: #D9534F;
@@ -84,7 +74,6 @@
   margin-top: 10px;
 }
 
-/* Submit button styling */
 .register-button {
   background-color: #E97451;
   color: #fff;
@@ -96,20 +85,203 @@
   transition: background-color 0.3s ease;
 }
 
-/* Hover effect for the submit button */
 .register-button:hover {
   background-color: #D76642;
 }
 
-/* Disabled button styling */
+
 .register-button:disabled {
   background-color: #D1D1D1;
   cursor: not-allowed;
 }
 
-/* Agreement text styling */
+
 .register-agreement {
   text-align: center;
   font-size: 12px;
   color: #223D6C;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+
+.register-box {
+  background-color: #dae8e3;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 1010; 
+}
+
+
+
+
+.register-title {
+  font-size: 24px;
+  color: #223D6C;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+} */
+
+/* body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #F1EEDB; 
+} */
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(47, 49, 75, 0.95);
+  color: #FAF6E9;
+  padding: 1rem 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FAF6E9;
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: 2rem;
+  color: #FAF6E9;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #82B6A9; /* Mint Green */
+}
+
+/* Overlay */
+.overlay {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 6rem; /* For fixed navbar */
+}
+
+/* Register Box */
+.register-box {
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #FFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.register-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2F314B;
+}
+
+.register-description {
+  color: #88B0A2;
+  margin-bottom: 2rem;
+}
+
+/* Input Styling */
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #2F314B;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #82B6A9;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #DE7357; /* Coral */
+}
+
+/* Error Message */
+.alert {
+  color: #E97451; /* Coral Red */
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.register-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #DE7357;
+  color: #FAF6E9;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: #C06050;
+}
+
+.register-agreement {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1rem;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #2F314B, #3D8DAE);
+  color: #FAF6E9;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }

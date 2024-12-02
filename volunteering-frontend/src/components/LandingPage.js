@@ -2,26 +2,36 @@ import React, { useState, useEffect } from 'react';
 import '../App.css'; 
 
 import { 
-  FaUsers, 
+  // FaUsers, 
   FaCalendarAlt, 
   FaFacebookF, 
   FaTwitter, 
   FaInstagram, 
   FaLinkedinIn, 
   FaHandsHelping, 
-  FaGlobe, 
-  FaArrowRight,
+  // FaGlobe, 
+  // FaArrowRight,
   FaHeart,
   FaStar,
   FaShieldAlt,
   FaCertificate,
+  // FaLightbulb,
+  FaQuoteLeft,
  
 } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'react-bootstrap';
+import LoginForm from './LoginForm'; 
+import RegisterForm from './RegisterForm'; 
+// import RegisterAsOrganizer from './RegisterAsOrganizer'; 
 
 // Header Component with Scroll Effect
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(null);
+  useState(null); 
+  const [activeModal, setActiveModal] = useState(null);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +40,13 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  const openSignInModal = () => setActiveModal('signIn');
+  const openRegisterModal = () => setActiveModal('register');
+  const closeModal = () => {
+    setActiveModal(null);
+    setShowRegisterModal(null); // Close all register modals when closing
+  };
+
 
   const headerStyle = {
     position: 'fixed',
@@ -41,12 +58,12 @@ const Header = () => {
     backdropFilter: isScrolled ? 'blur(10px)' : 'none',
     boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : 'none',
     width: '100%', // Expand the width of the section
-    paddingLeft: '10%', 
+    paddingLeft: '8.3%', 
     paddingRight: '10%', 
   };
 
   const containerStyle = {
-    maxWidth: '1200px',
+    maxWidth: '1950px',
     margin: '0 auto',
     padding: '0 2rem',
     display: 'flex',
@@ -70,27 +87,34 @@ const Header = () => {
     fontWeight: '900',
     position: 'relative',
   };
-
-  return (
-    <header style={headerStyle}>
-      <div style={containerStyle}>
-      <a href="/" style={logoStyle}>Voluntry</a>
-        <nav style={{ display: 'flex', gap: '2.5rem' }}>
-          <a href="/about" style={linkStyle}>About</a>
-          <a href="/events" style={linkStyle}>Events</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-        </nav>
-        <div style={{ display: 'flex' }}>
-          <a href="/login">
-            <button style={{ backgroundColor: 'transparent', color: '#FAF6E9', marginRight: '0.5rem' }}>Sign In</button>
-          </a>
-          <a href="/register">
-            <button style={{ backgroundColor: '#E07A5F', color: 'white', borderRadius: '30px' }}>Register</button>
-          </a>
-        </div>
+return (
+  <header style={headerStyle}>
+    <div style={containerStyle}>
+    <a href="/" style={logoStyle}>Voluntry</a>
+      <nav style={{ display: 'flex', gap: '2.5rem' }}>
+        <a href="/about" style={linkStyle}>About</a>
+        <a href="/events" style={linkStyle}>Events</a>
+        <a href="/contact" style={linkStyle}>Contact</a>
+      </nav>
+      <div style={{ display: 'flex' }}>
+        <button onClick={openSignInModal} style={{ backgroundColor: 'transparent', color: '#FAF6E9', marginRight: '0.5rem' }}>Sign In</button>
+        <button onClick={openRegisterModal} style={{ backgroundColor: '#E07A5F', color: 'white', borderRadius: '30px',fontWeight:'bold' }}>Volunteer</button>
       </div>
-    </header>
-  );
+    </div>
+
+    {/* Sign In Modal */}
+    <Modal show={activeModal === 'signIn'} onHide={closeModal} centered>
+        <LoginForm closeModal={closeModal} />
+    </Modal>
+
+    {/* Register Modal */}
+    <Modal show={activeModal === 'register'} onHide={closeModal} centered>
+        <RegisterForm closeModal={closeModal} />
+    </Modal>
+
+
+  </header>
+);
 };
 
 const Hero = () => {
@@ -102,11 +126,12 @@ const Hero = () => {
     width: '100%', // Expand the width of the section
     paddingLeft: '10%', // Add some padding on the left
     paddingRight: '10%', // Add some padding on the right
+    height: '120%',
   };
 
   // Inline styles for the shake animation
   const imageStyle = {
-    width: '65%',
+    width: '55%',
     borderRadius: '125px',
     boxShadow: '0 30px 50px rgba(0, 0, 0, 1.2)',
     animation: 'shake 1.5s ease-in-out infinite',
@@ -116,13 +141,13 @@ const Hero = () => {
     <section style={sectionStyle}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
         <div style={{ maxWidth: '650px' }}> {/* Restrict text width for better layout */}
-          <h1 style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color:'#FDF5E6' }}>Make a <br/>Difference Through Volunteering</h1>
+          <h1 style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color:'#FDF5E6' }}>Make a Difference<br/> Through <br/>Volunteering</h1>
           <p style={{ fontSize: '1.25rem', marginBottom: '2.6rem'}}>
             Connect with meaningful opportunities <br/>and create positive change in your community.
           </p>
           <a href="/register-organizer">
-            <button style={{ backgroundColor: '#E07A5F', color: 'white', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '0.75rem', width: '35%' , fontWeight:'bold' }}>
-              Get Started <FaArrowRight />
+            <button style={{ backgroundColor: '#E07A5F', color: 'white', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '0.75rem', width: '29%'  ,textDecoration :'none', fontSize: '19px'}}>
+              Organizer 
             </button>
           </a>
         </div>
@@ -178,192 +203,471 @@ const Features = () => {
     </section>
   );
 };
-const Inspiration = () => {
-  const sectionStyle = {
-    padding: '7rem 0',
-    background: ' url("/people.webp")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    color: 'white',
-    textAlign: 'center',
-    height:'420px',
-  };
 
-  const imageStyle = {
-    display: 'none', // Hide the image as it's now a background
-  };
 
-  const textStyle = {
-    fontSize: '1.5rem',
-    fontWeight: '500',
-    margin: '0 auto',
-    maxWidth: '800px',
-  };
+// const Inspiration = () => {
+//   const sectionStyle = {
+//     padding: '7rem 0',
+//     background: 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/people.webp")',
+//     backgroundPosition: 'center',
+//     color: '#000000',
+//     textAlign: 'center',
+//     height: 'auto', // Adjust height to accommodate additional content
+//     fontWeight: 'bold',
+//     backgroundSize: 'cover',
+//     height: '650px',
+//   };
 
-  return (
-    <section style={sectionStyle}>
-      <h2 style={{ fontSize: '2.75rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Be Part of Something Great</h2>
-      <p style={textStyle}>Join thousands of volunteers making an impact. Whether you want to help locally or globally, every contribution counts.</p>
-      {/* The img tag is removed as the background image is now handled by CSS */}
-    </section>
-  );
-};
+//   const textStyle = {
+//     fontSize: '1.5rem',
+//     fontWeight: '500',
+//     margin: '0 auto',
+//     maxWidth: '800px',
+//   };
+
+//   const features = [
+//     {
+//       icon: <FaHeart size={48} style={{ color: 'coral' }} />,
+//       title: 'Make a Difference',
+//       description: 'Your efforts can transform lives and bring hope to communities in need.',
+//     },
+//     {
+//       icon: <FaGlobe size={48} style={{ color: 'coral' }} />,
+//       title: 'Global Impact',
+//       description: 'Expand your reach by contributing to local and international initiatives.',
+//     },
+//     {
+//       icon: <FaUsers size={48} style={{ color: 'coral' }} />,
+//       title: 'Join a Community',
+//       description: 'Be part of a supportive network of volunteers working together for change.',
+//     },
+//     {
+//       icon: <FaLightbulb size={48} style={{ color: 'coral' }} />,
+//       title: 'Inspire Innovation',
+//       description: 'Bring fresh ideas and inspire creativity in your volunteer efforts.',
+//     },
+//   ];
+
+//   const featureContainerStyle = {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//     justifyContent: 'center',
+//     marginTop: '3rem',
+//   };
+
+//   const featureCardStyle = {
+//     width: '250px',
+//     margin: '1rem',
+//     background: '#fff', // White background
+//     borderRadius: '10px',
+//     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+//     overflow: 'hidden',
+//     transition: 'transform 0.3s ease, box-shadow 0.3s ease', // Smooth animation
+//     cursor: 'pointer',
+//   };
+
+//   const featureCardHoverStyle = {
+//     transform: 'scale(1.05)', // Slightly enlarge on hover
+//     boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
+//   };
+
+//   const iconStyle = {
+//     marginBottom: '1rem',
+//   };
+
+//   return (
+//     <section style={sectionStyle}>
+//       {/* Header */}
+//       <h2 style={{ fontSize: '2.75rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Be Part of Something Great</h2>
+//       <p style={textStyle}>
+//         Join thousands of volunteers making an impact. Whether you want to help locally or globally, every contribution
+//         counts.
+//       </p>
+
+//       {/* Features */}
+//       <div style={featureContainerStyle}>
+//         {features.map((feature, index) => (
+//           <div
+//             key={index}
+//             style={featureCardStyle}
+//             onMouseEnter={(e) => {
+//               e.currentTarget.style.transform = featureCardHoverStyle.transform;
+//               e.currentTarget.style.boxShadow = featureCardHoverStyle.boxShadow;
+//             }}
+//             onMouseLeave={(e) => {
+//               e.currentTarget.style.transform = '';
+//               e.currentTarget.style.boxShadow = '';
+//             }}
+//           >
+//             <div style={{ textAlign: 'center', padding: '2rem' }}>
+//               <div style={iconStyle}>{feature.icon}</div>
+//               <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>{feature.title}</h3>
+//               <p style={{ fontSize: '1rem', color: '#555' }}>{feature.description}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
 const SubscriptionPlans = () => {
   const plans = [
     {
-      title: "1-Month Plan",
-      price: "₹500",
+      title: "Starter Plan",
+      price: "$25",
       duration: "Monthly",
       features: [
-        "Access to all events",
-        "Basic support",
-        "Volunteer match recommendations",
-        "Renewable monthly",
+        "List up to 5 events per month",
+        "Basic volunteer management tools (e.g., event sign-ups)",
+        "Standard email support",
       ],
-      link: "/create-event-payment",
+      link: "/create-event",
     },
     {
-      title: "6-Month Plan",
-      price: "₹1000",
-      duration: "6 Months",
+      title: "Growth Plan",
+      price: "$65",
+      duration: "Monthly",
       features: [
-        "Priority support",
-        "All 1-month plan features",
-        "Access to premium events",
-        "50% discount ",
+        "Unlimited event listings",
+        "Priority listing of events on the platform",
+        "Marketing support (e.g., newsletters, social media boosts)",
       ],
-      link: "/create-event-payment",
+      link: "/create-event",
     },
     {
-      title: "1-Year Plan",
-      price: "₹1500",
-      duration: "Annual",
+      title: "Enterprise Plan",
+      price: "$120",
+      duration: "Monthly",
       features: [
-        "Premium support",
-        "All 6-month plan features",
-        "Free access to exclusive webinars",
-        "Recognition ",
+        "Dedicated account manager for support",
+        "Custom branding for events",
+        "Customizable event workflows",
       ],
-      link: "/create-event-payment",
+      link: "/create-event",
     },
   ];
 
   const sectionStyle = {
-    padding: '7rem 0',
-    backgroundColor: 'white',
+    padding: "7rem 0",
+    backgroundColor: "white",
   };
 
-  const cardStyle = {
-    width: '300px',
-    padding: '2rem',
-    backgroundColor: '#41436A',
-    borderRadius: '20px',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-    border: '2px solid transparent',
-    transition: 'border-color 0.3s ease',
+  const cardContainerStyle = {
+    position: "relative",
+    width: "300px",
+    padding: "2rem",
+    backgroundColor: "#41436A",
+    borderRadius: "20px",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+    overflow: "hidden",
+    zIndex: 1,
+    animation: "blinkOutline 1.5s infinite",
   };
 
-  const cardHoverStyle = {
-    border: '2px solid coral', // Set border color to blue on hover
+  const cardContentStyle = {
+    position: "relative",
+    zIndex: 2,
+    color: "white",
+    textAlign: "center",
   };
 
   const buttonStyle = {
-    backgroundColor: 'coral',
-    color: 'white',
-    borderRadius: '30px',
-    padding: '10px 20px',
-    marginTop: '1rem',
-    width: '100%',
-    fontWeight: 'bold',
-    transition: 'background-color 0.3s ease, color 0.3s ease',
+    backgroundColor: "coral",
+    color: "white",
+    borderRadius: "30px",
+    padding: "10px 20px",
+    marginTop: "1rem",
+    width: "100%",
+    fontWeight: "bold",
+    transition: "background-color 0.3s ease, color 0.3s ease",
   };
 
   const buttonHoverStyle = {
-    backgroundColor: 'white',
-    color: 'coral',
+    backgroundColor: "white",
+    color: "coral",
+  };
+
+  const blinkOutlineStyle = `
+    @keyframes blinkOutline {
+      0%, 100% {
+        box-shadow: 0 0 10px 2px coral;
+      }
+      50% {
+        box-shadow: 0 0 10px 6px coral;
+      }
+    }
+  `;
+
+  return (
+    <>
+      <style>{blinkOutlineStyle}</style>
+      <section style={sectionStyle}>
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "2.75rem",
+              fontWeight: "bold",
+              color: "#2F314B",
+              marginBottom: "1.5rem",
+            }}
+          >
+            Choose Your Plan
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              gap: "2rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {plans.map((plan, index) => (
+              <div key={index} style={cardContainerStyle} className="card-container">
+                <div style={cardContentStyle}>
+                  <h3 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+                    {plan.title}
+                  </h3>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {plan.price}
+                  </div>
+                  <p style={{ fontWeight: "bold" }}>{plan.duration}</p>
+                  <ul
+                    style={{
+                      textAlign: "left",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} style={{ marginBottom: "0.5rem" }}>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={plan.link}>
+                    <button
+                      style={buttonStyle}
+                      onMouseEnter={(e) =>
+                        Object.assign(e.target.style, buttonHoverStyle)
+                      }
+                      onMouseLeave={(e) =>
+                        Object.assign(e.target.style, buttonStyle)
+                      }
+                    >
+                      Subscribe Now
+                    </button>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+const FAQ = () => {
+  const faqs = [
+    {
+      question: "What is Voluntry?",
+      answer: "Voluntry is a platform that connects volunteers with meaningful opportunities to make a difference in their communities.",
+    },
+    {
+      question: "How do I register as a volunteer?",
+      answer: "Simply click the 'Volunteer' button at the top right of the page, fill in the required details, and start exploring opportunities!",
+    },
+    {
+      question: "Is there a cost to using Voluntry?",
+      answer: "Signing up as a volunteer is free. However, organizations may choose subscription plans for additional features.",
+    },
+    {
+      question: "Can I organize events on Voluntry?",
+      answer: "Yes! You can register as an organizer and use our tools to create and manage events.",
+    },
+    {
+      question: "How does the platform ensure verified opportunities?",
+      answer: "We thoroughly vet every organization to ensure opportunities are legitimate and impactful.",
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAnswer = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
   };
 
   return (
-    <section style={sectionStyle}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', fontWeight: 'bold' }}>
-        <h2 style={{ fontSize: '2.75rem', fontWeight: 'bold', color: '#2F314B', marginBottom: '1.5rem' }}>Choose Your Plan</h2>
-        <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {plans.map((plan, index) => (
-            <div 
-              key={index} 
-              style={cardStyle}
-              onMouseEnter={(e) => Object.assign(e.currentTarget.style, cardHoverStyle)}
-              onMouseLeave={(e) => Object.assign(e.currentTarget.style, cardStyle)}
+    <section style={{ padding: "7rem 0", backgroundColor: "#FAF6E9", color: "#2F314B" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <h2
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: "2rem",
+          }}
+        >
+          Frequently Asked Questions
+        </h2>
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            style={{
+              borderBottom: "1px solid #ddd",
+              padding: "1rem 0",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onClick={() => toggleAnswer(index)}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              <h3 style={{ fontSize: '1.5rem', color: 'white', marginBottom: '0.5rem' }}>{plan.title}</h3>
-              <div style={{ fontSize: '2rem', color: 'white', fontWeight: 'bold' }}>{plan.price}</div>
-              <p style={{ color: 'white', fontWeight: 'bold' }}>{plan.duration}</p>
-              <ul style={{ textAlign: 'left', marginTop: '1rem', color: 'white' }}>
-                {plan.features.map((feature, idx) => (
-                  <li key={idx} style={{ marginBottom: '0.5rem' }}>{feature}</li>
-                ))}
-              </ul>
-              <a href={plan.link}>
-                <button 
-                  style={buttonStyle}
-                  onMouseEnter={(e) => Object.assign(e.target.style, buttonHoverStyle)} 
-                  onMouseLeave={(e) => Object.assign(e.target.style, buttonStyle)}
-                >
-                  Subscribe Now
-                </button>
-              </a>
+              <span
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "bold",
+                  color: "#2F314B",
+                }}
+              >
+                {faq.question}
+              </span>
+              <span style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#DE7357" }}>
+                {activeIndex === index ? "-" : "+"}
+              </span>
             </div>
-          ))}
-        </div>
+            <div
+              style={{
+                maxHeight: activeIndex === index ? "500px" : "0",
+                overflow: "hidden",
+                transition: "max-height 0.3s ease",
+                color: "#666",
+                marginTop: activeIndex === index ? "1rem" : "0",
+              }}
+            >
+              {activeIndex === index && (
+                <p style={{ fontSize: "1rem", lineHeight: "1.5rem" }}>{faq.answer}</p>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 };
-
-const Impact = () => {
-  const stats = [
-    { icon: FaUsers, value: "10,000+", label: "Volunteers" },
-    { icon: FaHandsHelping, value: "500+", label: "Projects" },
-    { icon: FaGlobe, value: "50+", label: "Communities" }
+const FeedbackSection = () => {
+  const feedbacks = [
+    {
+      name: "John Doe",
+      role: "Volunteer",
+      quote:
+        "This platform has been a game-changer for me. Volunteering has never been so organized and impactful!",
+      avatar: "/Untitled design (1).png", // Replace with actual image paths
+    },
+    {
+      name: "Jane Smith",
+      role: "Event Organizer",
+      quote:
+        "The tools provided by this platform made managing my events seamless. I can focus more on creating impact!",
+      avatar: "/Untitled design (3).png",
+    },
+    {
+      name: "Alexa Johnson",
+      role: "Volunteer",
+      quote:
+        "I found amazing opportunities to give back to my community. It's an incredible experience every time.",
+      avatar: "/Untitled design (2).png",
+    },
   ];
 
   const sectionStyle = {
-    padding: '7rem 0',
-    background: 'linear-gradient(135deg, rgba(250, 246, 233, 0.85), rgba(47, 49, 75, 0.85)), url("/voluntry.webp")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    color: '#41436A',
+    padding: "7rem 0",
+    backgroundColor: "#F5EBDC",
+    textAlign: "center",
   };
 
   const cardStyle = {
-    padding: '2rem',
-    backgroundColor: '#41436A',
-    color: 'white',
-    borderRadius: '20px',
-    transition: 'background-color 0.3s ease',
+    padding: "2rem",
+    backgroundColor: "white",
+    borderRadius: "20px",
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    maxWidth: "350px",
+    margin: "auto",
   };
 
-  const cardHoverStyle = {
-    backgroundColor: 'white', // Light blue hover effect
-    color: '#41436A',
+  const avatarStyle = {
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    marginBottom: "1rem",
+    objectFit: "cover",
+  };
+
+  const quoteStyle = {
+    fontStyle: "italic",
+    color: "#41436A",
+    marginBottom: "1.5rem",
+  };
+
+  const iconStyle = {
+    fontSize: "1.5rem",
+    color: "coral",
+    marginRight: "0.5rem",
   };
 
   return (
     <section style={sectionStyle}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.75rem', fontWeight: 'bold' }}>Our Impact</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
-          {stats.map((stat, index) => (
-            <div 
-              key={index} 
-              style={cardStyle} 
-              onMouseEnter={(e) => Object.assign(e.currentTarget.style, cardHoverStyle)}
-              onMouseLeave={(e) => Object.assign(e.currentTarget.style, cardStyle)}
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <h2 style={{ fontSize: "2.75rem", fontWeight: "bold", marginBottom: "3rem",color:"coral" }}>
+          What Our Users Say
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            gap: "2rem",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {feedbacks.map((feedback, index) => (
+            <div
+              key={index}
+              style={cardStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.05)";
+                e.currentTarget.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.1)";
+              }}
             >
-              <stat.icon style={{ fontSize: '2.5rem', color: '#E07A5F' }} />
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{stat.value}</div>
-              <div>{stat.label}</div>
+              <img src={feedback.avatar} alt={feedback.name} style={avatarStyle} />
+              <p style={quoteStyle}>
+                <FaQuoteLeft style={iconStyle} />
+                {feedback.quote}
+              </p>
+              <h4 style={{ margin: "0", color: "#2F314B" }}>{feedback.name}</h4>
+              <p style={{ fontSize: "0.9rem", color: "gray" }}>{feedback.role}</p>
             </div>
           ))}
         </div>
@@ -371,26 +675,73 @@ const Impact = () => {
     </section>
   );
 };
-
 
 const Footer = () => {
   const footerStyle = {
     background: 'linear-gradient(135deg, #2F314B 0%, #3D8DAE 100%)',
     color: '#FAF6E9',
-    padding: '4rem 0',
+    padding: '4rem 2rem',
+  };
+
+  const sectionStyle = {
+    flex: '1',
+    minWidth: '200px',
+    marginBottom: '2rem',
   };
 
   const linkStyle = {
     color: '#FAF6E9',
     textDecoration: 'none',
     fontSize: '1rem',
+    transition: 'color 0.3s',
+  };
+
+  const linkHoverStyle = {
+    color: '#82B6A9', // Mint green on hover
+  };
+
+  const iconStyle = {
+    color: '#FAF6E9',
+    fontSize: '1.5rem',
+    transition: 'color 0.3s',
+    margin: '0 0.5rem',
+  };
+
+  const iconHoverStyle = {
+    color: '#82B6A9', // Mint green on hover
+  };
+
+  const inputStyle = {
+    flex: '1',
+    padding: '0.5rem',
+    fontSize: '1rem',
+    borderRadius: '4px',
+    border: '1px solid #3D8DAE',
+    backgroundColor: '#2F314B',
+    color: '#FAF6E9',
+    outline: 'none',
+  };
+
+  const buttonStyle = {
+    padding: '0.5rem 1rem',
+    fontSize: '1rem',
+    borderRadius: '4px',
+    backgroundColor: '#82B6A9', // Mint green
+    color: '#2F314B', // Dark blue for contrast
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  };
+
+  const buttonHoverStyle = {
+    backgroundColor: '#6EA691',
   };
 
   return (
     <footer style={footerStyle}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', textAlign: 'left' }}>
         {/* About Us Section */}
-        <div style={{ flex: '1', minWidth: '200px', marginBottom: '2rem' }}>
+        <div style={sectionStyle}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>About Us</h3>
           <p style={{ lineHeight: '1.6' }}>
             Voluntry is dedicated to connecting volunteers with impactful projects worldwide. Join us to make a difference in your community and beyond.
@@ -398,18 +749,26 @@ const Footer = () => {
         </div>
 
         {/* Quick Links Section */}
-        <div style={{ flex: '1', minWidth: '200px', marginBottom: '2rem' }}>
+        <div style={sectionStyle}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>Quick Links</h3>
           <ul style={{ listStyle: 'none', padding: 0, lineHeight: '2' }}>
-            <li><a href="/about" style={linkStyle}>About Us</a></li>
-            <li><a href="/events" style={linkStyle}>Our Events</a></li>
-            <li><a href="/register" style={linkStyle}>Become a Volunteer</a></li>
-            <li><a href="/contact" style={linkStyle}>Contact Us</a></li>
+            {['About Us', 'Our Events', 'Become a Volunteer', 'Contact Us'].map((text, idx) => (
+              <li key={idx}>
+                <a
+                  href={`/${text.toLowerCase().replace(/\s+/g, '-')}`}
+                  style={linkStyle}
+                  onMouseEnter={(e) => (e.target.style.color = linkHoverStyle.color)}
+                  onMouseLeave={(e) => (e.target.style.color = linkStyle.color)}
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contact Us Section */}
-        <div style={{ flex: '1', minWidth: '200px', marginBottom: '2rem' }}>
+        <div style={sectionStyle}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>Contact Us</h3>
           <p style={{ lineHeight: '1.6' }}>
             Phone: 0753648410<br />
@@ -417,21 +776,47 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Social Media Links */}
-        <div style={{ flex: '1', minWidth: '200px', marginBottom: '2rem', textAlign: 'center' }}>
+        {/* Social Media Links and Newsletter */}
+        <div style={{ ...sectionStyle, textAlign: 'center' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>Follow Us</h3>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map((Icon, index) => (
-              <a key={index} href="#123" style={{ color: '#FAF6E9', fontSize: '1.5rem' }}>
+              <a
+                key={index}
+                href="#123"
+                style={iconStyle}
+                onMouseEnter={(e) => (e.target.style.color = iconHoverStyle.color)}
+                onMouseLeave={(e) => (e.target.style.color = iconStyle.color)}
+              >
                 <Icon />
               </a>
             ))}
+          </div>
+          <div>
+            {/* <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>Newsletter</h3> */}
+            <p style={{ color: '#FAF6E9', marginBottom: '1rem' }}>Stay updated with our latest opportunities and news.</p>
+            <form style={{ display: 'flex', gap: '0.5rem' }}>
+              <input
+                type="email"
+                placeholder="Your email"
+                style={inputStyle}
+                required
+              />
+              <button
+                type="submit"
+                style={buttonStyle}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = buttonHoverStyle.backgroundColor)}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = buttonStyle.backgroundColor)}
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </div>
 
       {/* Copyright Section */}
-      <div style={{ textAlign: 'center', marginTop: '2rem', fontSize: '0.9rem' }}>
+      <div style={{ textAlign: 'center', marginTop: '3rem', fontSize: '0.9rem', borderTop: '1px solid #FAF6E9', paddingTop: '1rem' }}>
         <p>Voluntry © 2024. All rights reserved.</p>
       </div>
     </footer>
@@ -444,9 +829,10 @@ const App = () => (
     <Header />
     <Hero />
     <Features />
-    <Inspiration /> 
+    {/* <Inspiration />  */}
     <SubscriptionPlans />
-    <Impact />
+    <FAQ />
+    <FeedbackSection />
     <Footer />
   </div>
 );

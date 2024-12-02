@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Changed to useNavigate for React
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './RegisterAsOrganizer.css'; // Importing external CSS file
+import './RegisterAsOrganizer.css';
 
 export default function RegisterAsOrganizer() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export default function RegisterAsOrganizer() {
       });
 
       alert(response.data.message);
-      navigate('/home'); // Use navigate instead of router.push
+      navigate('/home');
     } catch (error) {
       console.error("Registration error:", error.response?.data || error.message);
       setError(error.response?.data?.message || "Registration failed. Please try again.");
@@ -43,62 +43,82 @@ export default function RegisterAsOrganizer() {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-box">
-        <h2 className="register-title">Register as Organizer</h2>
-        <p className="register-description">Create an account to start organizing events</p>
+    <div className="overlay">
+      <header className="navbar">
+        <div className="navbar-container">
+          <a href="/" className="logo">Voluntry</a>
+          <nav className="nav-links">
+            <a href="/about">About</a>
+            <a href="/events">Events</a>
+            <a href="/contact">Contact</a>
+            {/* <a href="/login">Sign In</a> */}
+          </nav>
+        </div>
+      </header>
 
-        <form onSubmit={handleRegister} className="register-form">
-          <div className="input-group">
-            <label htmlFor="username" className="input-label">Username</label>
-            <input
-              id="username"
-              type="text"
-              placeholder="Enter your username"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              className="input-field"
-              required
-            />
-          </div>
+      <main className="main-content">
+        <div className="register-box">
+          <h2 className="register-title">Register as Organizer</h2>
+          <p className="register-description">Create an account to start organizing events</p>
 
-          <div className="input-group">
-            <label htmlFor="email" className="input-label">Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="input-field"
-              required
-            />
-          </div>
+          <form onSubmit={handleRegister} className="register-form">
+            <div className="input-group">
+              <label htmlFor="username" className="input-label">Username</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                className="input-field"
+                required
+              />
+            </div>
 
-          <div className="input-group">
-            <label htmlFor="password" className="input-label">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Create a password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              className="input-field"
-              required
-            />
-          </div>
+            <div className="input-group">
+              <label htmlFor="email" className="input-label">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="input-field"
+                required
+              />
+            </div>
 
-          {error && <p className="alert">{error}</p>}
+            <div className="input-group">
+              <label htmlFor="password" className="input-label">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Create a password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="input-field"
+                required
+              />
+            </div>
 
-          <button type="submit" className="register-button" disabled={isLoading}>
-            {isLoading ? "Creating your account..." : "Register"}
-          </button>
+            {error && <p className="alert">{error}</p>}
 
-          <p className="register-agreement">
-            By registering, you agree to our Terms of Service and Privacy Policy
-          </p>
-        </form>
-      </div>
+            <button type="submit" className="register-button" disabled={isLoading}>
+              {isLoading ? "Creating your account..." : "Register"}
+            </button>
+
+            <p className="register-agreement">
+              By registering, you agree to our Terms of Service and Privacy Policy
+            </p>
+          </form>
+        </div>
+      </main>
+
+      <footer className="footer">
+        <div className="footer-content">
+          <p>Voluntry © 2024. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }

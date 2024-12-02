@@ -204,3 +204,96 @@
   font-size: 0.875rem;
   color: #E27D60;
 }
+/* Card Styles */
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  color: #2F314B;
+}
+
+.card-icon {
+  width: 20px;
+  height: 20px;
+  color: #82B6A9; /* Icon color */
+}
+
+/* Scrollable Content */
+.card-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Activity Item */
+.activity-item {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 10px 0;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #2F314B;
+}
+
+.activity-item strong {
+  color: #DE7357; /* Highlight user ID */
+}
+
+/* Button Styles */
+.activity-button {
+  background-color: #DE7357;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.activity-button:hover {
+  background-color: #c16446;
+}
+
+.activity-button.disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+.activity-button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card-header h3 {
+    font-size: 1rem;
+  }
+
+  .activity-item p {
+    font-size: 0.9rem;
+  }
+
+  .activity-button {
+    font-size: 0.8rem;
+  }
+}

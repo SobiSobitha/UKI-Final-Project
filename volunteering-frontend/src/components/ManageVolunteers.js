@@ -122,30 +122,41 @@ const ManageVolunteers = () => {
 
   return (
     <div className="manage-volunteers-container">
-      <h1>Manage Volunteers</h1>
-      <div className="volunteers-grid">
-        {volunteers.length > 0 ? (
-          volunteers.map((volunteer) => (
-            <div
-              key={volunteer._id}
-              className="volunteer-card"
-              onClick={() => handleCardClick(volunteer)}
-            >
-              <div className="volunteer-avatar">
-                <span>{volunteer.name ? volunteer.name.charAt(0).toUpperCase() : 'N/A'}</span>
-              </div>
-              <h3>{volunteer.name ? volunteer.name : 'No Name Available'}</h3>
+    <h1>Manage Volunteers</h1>
+    <div className="volunteers-grid">
+      {volunteers.length > 0 ? (
+        volunteers.map((volunteer) => (
+          <div
+            key={volunteer._id}
+            className="volunteer-card"
+            onClick={() => handleCardClick(volunteer)}
+          >
+            <div className="volunteer-avatar">
+              {volunteer.image ? (
+                <img
+                  src={volunteer.image}
+                  alt={`${volunteer.name}'s avatar`}
+                  className="volunteer-image"
+                />
+              ) : (
+                <img
+                  src="/Profile.png"
+                  alt="Default avatar"
+                  className="volunteer-image"
+                />
+              )}
             </div>
-          ))
-        ) : (
-          <p>No volunteers found</p>
-        )}
-      </div>
+          </div>
+        ))
+      ) : (
+        <p>No volunteers found</p>
+      )}
+    </div>
 
       {/* Modal Section */}
       {selectedVolunteer && (
         <div className="volunteer-modal">
-          <div className="modal-content">
+          <div className="view-modal">
             <span className="close-button" onClick={handleCloseModal}>
               &times;
             </span>
@@ -213,3 +224,4 @@ const ManageVolunteers = () => {
 };
 
 export default ManageVolunteers;
+

@@ -157,4 +157,55 @@
     width: 8px;
     height: 8px;
   }
-  
+  /* AdminDashboard.css */
+
+/* Ensuring the user table takes full width */
+.user-card .card-content {
+  width: 100%;
+}
+
+.user-card table {
+  width: 100%; /* Full width for the table */
+  border-collapse: collapse; /* Collapsing table borders for cleaner look */
+  table-layout: fixed; /* Ensures all columns have equal width */
+}
+
+.user-card th, .user-card td {
+  padding: 10px; /* Add padding for cells */
+  border: 1px solid #ddd; /* Light border around cells */
+  text-align: left; /* Align text to the left */
+}
+
+.user-card th {
+  background-color: #f4f4f4; /* Slight gray background for headers */
+  font-weight: bold;
+}
+
+.user-card tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row background color */
+}
+
+.user-card tr:hover {
+  background-color: #e0e0e0; /* Highlight row on hover */
+}
+
+.suspend-btn {
+  background-color: #DE7357; /* Button color */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.suspend-btn:hover {
+  background-color: #B56347; /* Darken the button color on hover */
+}
+.message-section{
+  color:#2F314B;
+}
+.message-list{
+  color: #2F314B;
+  font-weight:bold;
+  font-size: 24px;
+}
